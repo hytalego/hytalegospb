@@ -1,393 +1,365 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ru">
 <head>
-  <meta charset="UTF-8"/>
-  <meta name="viewport" content="width=device-width, initial-scale=1"/>
-  <title>Hytale Epic Landing Page</title>
-  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500&family=Roboto:wght@400;700&display=swap" rel="stylesheet"/>
-  <style>
-    /* Сброс */
-    *{margin:0;padding:0;box-sizing:border-box;}
-    body {
-      font-family:'Roboto',sans-serif;
-      background:#000 url('https://www.transparenttextures.com/patterns/black-felt.png') repeat;
-      color:#fff;overflow-x:hidden;
-    }
-    a{color:inherit;text-decoration:none;}
+    <meta charset="UTF-8">
+    <title>Hytale – Эпическая игра</title>
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        /* Стиль для таймера с анимацией */
+        #timer {
+            position: fixed;
+            top: 120px;
+            left: 50%;
+            transform: translateX(-50%);
+            font-size: 20px;
+            font-weight: bold;
+            color: #ffffff;
+            background: rgba(0, 0, 0, 0.9);
+            padding: 10px 15px;
+            border-radius: 10px;
+            border: 1px solid #00d4ff;
+            box-shadow: 0 0 15px rgba(0, 212, 255, 0.3);
+            z-index: 1000;
+            animation: glow 2s infinite alternate;
+            max-width: 90vw;
+            text-align: center;
+        }
 
-    /* Preloader */
-    #preloader {
-      position:fixed;top:0;left:0;right:0;bottom:0;
-      background:#000;display:flex;
-      align-items:center;justify-content:center;
-      z-index:9999;
-    }
-    .spinner {
-      width:50px;height:50px;
-      border:5px solid #222;border-top:5px solid #0ff;
-      border-radius:50%;animation:spin 1s linear infinite;
-    }
-    @keyframes spin{to{transform:rotate(360deg);}}
-    #content{display:none;}
+        #timer span {
+            display: inline-block;
+            margin: 0 1px;
+            transition: all 0.3s ease;
+        }
 
-    /* Countdown */
-    .countdown-container {
-      position:fixed;top:0;left:0;right:0;
-      background:rgba(0,255,255,0.1);backdrop-filter:blur(5px);
-      display:flex;flex-direction:column;align-items:center;
-      padding:8px 0;font-family:'Orbitron',sans-serif;
-      z-index:100;
-    }
-    .countdown-container .label {
-      font-size:1rem; margin-bottom:4px;
-    }
-    .timer {
-      display:flex;gap:8px;
-    }
-    .timer span {
-      min-width:48px;
-      background:#0ff8;color:#000;
-      padding:6px 0;border-radius:4px;
-      text-align:center;font-size:1.1rem;
-      transition:transform .3s,opacity .3s;
-    }
-    .timer span.change{transform:scale(1.2);opacity:.6;}
+        @keyframes glow {
+            from { box-shadow: 0 0 10px rgba(0, 212, 255, 0.3); }
+            to { box-shadow: 0 0 20px rgba(0, 212, 255, 0.6), 0 0 30px rgba(0, 212, 255, 0.4); }
+        }
 
-    /* Notice Banner */
-    .notice-banner {
-      position:fixed;top:-50px;left:0;right:0;
-      background:#ff4444;color:#fff;
-      padding:10px;text-align:center;
-      font-weight:700;font-size:1rem;
-      animation:slideDown .6s forwards ease-out;
-      z-index:200;
-    }
-    @keyframes slideDown{from{top:-50px}to{top:0}}
-    .notice-banner.hidden{animation:slideUp .4s forwards ease-in;}
-    @keyframes slideUp{from{top:0}to{top:-50px}}
-    .notice-banner button {
-      position:absolute;right:10px;top:8px;
-      background:none;border:none;color:#fff;
-      font-size:1.2rem;cursor:pointer;
-    }
-
-    /* Header */
-    header {
-      background:linear-gradient(to right,#0c1b2e,#111);
-      padding:80px 20px 20px;margin-top:50px;
-      text-align:center;box-shadow:0 0 20px #0ff8;border-bottom:3px solid #0ff;
-    }
-    header img {
-      height:100px;filter:drop-shadow(0 0 15px #0ff);
-      transition:transform .3s;
-    }
-    header img:hover{transform:scale(1.05);}
-
-    /* Hero */
-    .hero {
-      text-align:center;padding:40px 20px;
-      animation:fadeIn 1.5s ease-out;
-    }
-    @keyframes fadeIn{from{opacity:0}to{opacity:1}}
-    .hero h1 {
-      font-size:2.8rem;margin-bottom:10px;font-family:'Orbitron';
-    }
-    .hero p {
-      font-size:1rem;max-width:600px;line-height:1.4;margin:0 auto 16px;
-    }
-    .button-group {
-      display:flex;gap:12px;flex-wrap:wrap;justify-content:center;
-    }
-    .button {
-      background:#0ff;color:#000;
-      padding:8px 16px;font-size:.9rem;font-weight:700;
-      border-radius:6px;
-      transition:background .3s,transform .2s;
-      box-shadow:0 4px 8px rgba(0,255,255,0.3);
-    }
-    .button:hover {
-      background:#0cc;transform:translateY(-2px);
-    }
-
-    /* Секции */
-    .section {
-      width:90%;max-width:1200px;
-      margin:24px auto;
-      text-align:center;
-    }
-    .section h2 {
-      font-family:'Orbitron';margin-bottom:12px;font-size:1.6rem;
-    }
-    .grid {
-      display:flex;flex-wrap:wrap;gap:16px;justify-content:center;
-    }
-    .card {
-      background:#222;padding:16px;
-      border-radius:10px;width:240px;
-      box-shadow:0 0 12px #0ff5;
-      transition:transform .3s,box-shadow .3s;
-    }
-    .card:hover {
-      transform:scale(1.05);box-shadow:0 0 24px #0ff;
-    }
-    .card h3 {
-      font-family:'Orbitron';margin-bottom:8px;font-size:1.1rem;
-    }
-    .card p { font-size:.9rem;line-height:1.3; }
-
-    /* Download */
-    .download-grid {
-      display:flex;flex-wrap:wrap;gap:16px;justify-content:center;
-    }
-    .download-box {
-      background:#222;padding:16px;
-      border-radius:10px;width:240px;
-      box-shadow:0 0 12px #0ff5;
-      transition:transform .3s,box-shadow .3s;
-    }
-    .download-box:hover {
-      transform:translateY(-4px);box-shadow:0 0 24px #0ff;
-    }
-    .download-box h2 {
-      font-family:'Orbitron';margin-bottom:8px;font-size:1.1rem;
-    }
-    .download-box p {
-      font-size:.9rem;line-height:1.3;margin-bottom:12px;
-    }
-    .download-box a {
-      background:#0ff;color:#000;
-      padding:6px 12px;font-size:.9rem;font-weight:700;
-      border-radius:4px;
-      transition:background .3s,transform .2s;
-    }
-    .download-box a:hover {
-      background:#0cc;transform:translateY(-2px);
-    }
-
-    /* Modal */
-    .modal {
-      display:none;position:fixed;
-      top:0;left:0;width:100%;height:100%;
-      background:rgba(0,0,0,0.8);
-      align-items:center;justify-content:center;
-      z-index:500;
-    }
-    .modal-content {
-      background:#222;padding:16px;
-      border-radius:8px;width:90%;max-width:400px;
-      position:relative;box-shadow:0 0 20px #0ff;
-    }
-    .modal-content .close {
-      position:absolute;top:8px;right:8px;
-      background:none;border:none;color:#fff;
-      font-size:1.2rem;cursor:pointer;
-    }
-
-    /* Invite */
-    .invite-popup {
-      position:fixed;bottom:-120px;right:20px;
-      background:#111;padding:12px;
-      border-radius:8px;width:200px;
-      text-align:center;color:#fff;
-      box-shadow:0 0 15px rgba(0,255,255,0.3);
-      transition:bottom .4s,opacity .4s;
-      opacity:0;z-index:400;
-    }
-    .invite-popup.show {
-      bottom:20px;opacity:1;
-    }
-    .invite-popup h4 {
-      font-family:'Orbitron';margin-bottom:6px;font-size:1rem;
-    }
-    .invite-popup p {
-      font-size:.85rem;line-height:1.2;margin-bottom:8px;
-    }
-    .invite-popup a {
-      background:#0ff;color:#000;
-      padding:4px 8px;font-size:.85rem;
-      border-radius:4px;
-      transition:background .3s;
-    }
-    .invite-popup a:hover {
-      background:#0cc;
-    }
-
-    /* Footer */
-    footer {
-      background:#111;padding:12px 0;
-      text-align:center;font-size:.85rem;color:#aaa;
-    }
-  </style>
+        @media (max-width: 768px) {
+            #timer {
+                font-size: 16px;
+                padding: 8px 10px;
+                top: 100px;
+            }
+        }
+    </style>
 </head>
 <body>
-
-  <!-- Preloader -->
-  <div id="preloader">
-    <div class="spinner"></div>
-  </div>
-
-  <!-- Основной контент -->
-  <div id="content">
-
-    <!-- Countdown -->
-    <div class="countdown-container">
-      <div class="label">Ура! Игра выходит через</div>
-      <div class="timer">
-        <span id="days">00д</span>
-        <span id="hours">00ч</span>
-        <span id="minutes">00м</span>
-        <span id="seconds">00с</span>
-      </div>
+    <div id="timer">
+        До объявления даты релиза игры осталось: <span id="days"></span>д <span id="hours"></span>ч <span id="minutes"></span>м <span id="seconds"></span>с
     </div>
 
-    <!-- Notice -->
-    <div id="notice" class="notice-banner">
-      ВНИМАНИЕ: САЙТ В РАЗРАБОТКЕ
-      <button onclick="closeNotice()">×</button>
-    </div>
 
-    <!-- Header -->
-    <header>
-      <img src="https://www.hytale.com/static/images/logo.png" alt="Hytale Logo"/>
+
+    <header class="header">
+        <div class="logo"><img src="img/logo.png" alt="Hytale Logo"></div>
+    <nav>
+            <ul>
+                <li><a href="#home">Главная</a></li>
+                <li><a href="#about">Об игре</a></li>
+                <li><a href="#screenshots">Скришоты</a></li>
+                <li><a href="#videos">Видео</a></li>
+                <li><a href="#download">Скачать</a></li>
+            </ul>
+        </nav>
     </header>
 
-    <!-- Hero -->
-    <section class="section hero">
-      <h1>Добро пожаловать в Hytale</h1>
-      <p>Погрузитесь в уникальный мир Hytale, где вас ждут приключения, магия и безграничный простор творчества. Исследуйте красочные биомы, стройте собственные города и сражайтесь с величайшими чудовищами!</p>
-      <div class="button-group">
-        <button class="button" onclick="scrollToDownload()">Перейти к загрузке</button>
-        <a class="button" href="https://discord.gg/hq2Vseee5K" target="_blank">Присоединиться к сообществу</a>
-        <button class="button" onclick="scrollToNews()">Читать новости</button>
-      </div>
+    <section id="home" class="hero">
+        <div class="content">
+            <h1>Добро пожаловать в Hytale!</h1>
+            <p>Погрузитесь в эпический фэнтезийный мир и станьте героями своего времени. Исследуйте подземелья, стройте крепости и сражайтесь с друзьями в уникальном мире блоков!</p>
+            <button class="cta">Узнать больше</button>
+        </div>
+        <div class="image">
+            <img src="img/logo.png" alt="Hytale Logo">
+        </div>
     </section>
 
-    <!-- News -->
-    <section class="section news-section">
-      <h2>📰 Последние новости</h2>
-      <div class="grid">
-        <div class="card news-item">
-          <h3>Скоро релиза. Таймер пошёл</h3>
-          <p>Скорее всего игра HYTALE выйдет именно в этот день но это не точно. Следите за обновлениями</p>
-          <button class="button" onclick="openModal()">Подробнее</button>
-        </div>
-      </div>
-    </section>
-
-    <!-- Download -->
-    <section class="section download-section">
-      <h2>⬇️ Секция загрузки</h2>
-      <div class="download-grid">
-        <div class="download-box">
-          <h2>Скачать лаунчер</h2>
-          <p>Надежный установщик автоматически загружает и обновляет все файлы Hytale. Идеально подходит для новичков и опытных игроков.</p>
-          <a href="https://hytalego.github.io/hytale/file/launcher.zip">Скачать лаунчер</a>
-        </div>
-        <div class="download-box">
-          <h2>Скачать Hytale (репак)</h2>
-          <p>Полная версия игры с оптимизацией. Просто распакуйте архив и начните играть без установки.</p>
-          <a href="https://hytalego.github.io/hytale/file/hytale_repack.zip">Скачать репак</a>
-        </div>
-      </div>
-    </section>
-
-    <!-- Modal -->
-    <div id="newsModal" class="modal" onclick="closeModal()">
-      <div class="modal-content" onclick="event.stopPropagation()">
-        <button class="close" onclick="closeModal()">×</button>
-        <h2>Подробности релиза</h2>
-        <p>Скорее всего игра HYTALE выйдет именно в этот день но это не точно. Следите за обновлениями</p>
-      </div>
+    <div class="discord-center">
+        <a href="https://discord.gg/J68Yjgjf" target="_blank" class="big-discord-btn">
+            <span class="btn-icon">💬</span> Присоединиться к Discord
+        </a>
     </div>
 
-    <!-- Features -->
-    <section class="section features">
-      <h2>✨ Особенности Hytale</h2>
-      <div class="grid">
-        <div class="card feature">
-          <h3>Мир без границ</h3>
-          <p>Исследуйте процедурно-генерируемые ландшафты: от снежных гор до пышных джунглей и подземных городов.</p>
+    <section id="about" class="info">
+        <h2>Об игре</h2>
+        <div class="info-tabs">
+            <div class="info-tab-buttons">
+                <button class="info-tab-btn active" data-info-tab="overview">Обзор</button>
+                <button class="info-tab-btn" data-info-tab="features">Особенности</button>
+                <button class="info-tab-btn" data-info-tab="modding">Модинг</button>
+            </div>
+            <div class="info-tab-content">
+                <div id="overview" class="info-tab-pane active">
+                    <h3>Что такое Hytale?</h3>
+                    <p>
+                        Hytale – это революционная игра в жанре «песочница», созданная Hypixel Studios.
+                        Это не просто Minecraft-клон, а полноценная платформа для творчества, где каждый игрок
+                        может стать создателем своего мира. Уникальная система блоков, динамическая погода,
+                        живые NPC и глубокий мультиплеер делают игру неповторимой.
+                    </p>
+                    <p>
+                        Игра сочетает элементы RPG, survival и sandbox. Исследуйте подземелья,
+                        собирайте ресурсы, стройте механизмы и мини-игры внутри самого Hytale.
+                        Система крафта предлагает более 200 предметов, а модификаторы позволяют
+                        создавать плавающие острова, подводные крепости и летательные аппараты.
+                    </p>
+                    <p>
+                        Мультиплеер поддерживает до 64 игроков одновременно. Объединяйтесь в кланы,
+                        стройте мегаполисы, соревновайтесь на аренах и участвуйте в еженедельных событиях.
+                    </p>
+                </div>
+                <div id="features" class="info-tab-pane">
+                    <h3>Ключевые особенности</h3>
+                    <div class="features-grid">
+                        <div class="feature-card">
+                            <span class="icon">🎮</span>
+                            <h4>Мультиплеер</h4>
+                            <p>Играйте с друзьями в кооперативе до 64 человек. Строительство и сражения в реальном времени.</p>
+                        </div>
+                        <div class="feature-card">
+                            <span class="icon">🛠️</span>
+                            <h4>Крафт</h4>
+                            <p>Более 200 предметов и рецептов. Создавайте артефакты и инструменты для любого случая.</p>
+                        </div>
+                        <div class="feature-card">
+                            <span class="icon">🌐</span>
+                            <h4>Открытый мир</h4>
+                            <p>Динамическая погода, биомы, тайны и живые NPC. Мир, который живет своей жизнью.</p>
+                        </div>
+                        <div class="feature-card">
+                            <span class="icon">🎨</span>
+                            <h4>Графика</h4>
+                            <p>Красивые визуалы, эффекты и анимации. Погрузитесь в детализированный мир.</p>
+                        </div>
+                        <div class="feature-card modding-special">
+                            <span class="icon">🧩</span>
+                            <h4>Модинг</h4>
+                            <p>Инструменты для создания собственных игр внутри Hytale. Безграничные возможности творчества.</p>
+                        </div>
+                        <div class="feature-card">
+                            <span class="icon">🔊</span>
+                            <h4>Звук</h4>
+                            <p>Иммерсивная звуковая атмосфера с эффектами и музыкой. Ощутите каждый момент.</p>
+                        </div>
+                        <div class="feature-card">
+                            <span class="icon">🔮</span>
+                            <h4>Магия</h4>
+                            <p>Кастомные заклинания и артефакты. Станьте могущественным волшебником.</p>
+                        </div>
+                        <div class="feature-card">
+                            <span class="icon">🗺️</span>
+                            <h4>Квесты</h4>
+                            <p>Еженедельные события и квесты. Всегда есть чем заняться.</p>
+                        </div>
+                        <div class="feature-card">
+                            <span class="icon">🌍</span>
+                            <h4>Мультиплатформенность</h4>
+                            <p>Играйте на PC, консолях и мобильных. Ваша игра везде с вами.</p>
+                        </div>
+                    </div>
+                </div>
+                <div id="modding" class="info-tab-pane">
+                    <h3>Модинг – Сердце Hytale</h3>
+                    <p>
+                        Модинг – это не просто дополнение, а сердце проекта Hytale. С самого начала разработчики
+                        сделали модинг приоритетным, создав мощную платформу для всех – от новичков до профессионалов.
+                        Hytale – это не только игра, но и инструмент для творчества, где каждый может создать свой шедевр.
+                    </p>
+                    <div class="modding-features">
+                        <div class="modding-card">
+                            <span class="icon">🌍</span>
+                            <h4>Новые биомы</h4>
+                            <p>Добавляйте уникальные ландшафты, растения и существа.</p>
+                        </div>
+                        <div class="modding-card">
+                            <span class="icon">🎮</span>
+                            <h4>Мини-игры</h4>
+                            <p>Полная свобода в создании игровых механик, от аркад до RPG.</p>
+                        </div>
+                        <div class="modding-card">
+                            <span class="icon">👤</span>
+                            <h4>Персонажи</h4>
+                            <p>Новые расы, классы, способности и внешний вид.</p>
+                        </div>
+                        <div class="modding-card">
+                            <span class="icon">🏗️</span>
+                            <h4>Структуры</h4>
+                            <p>Автоматизация, механизмы, транспорт – все в ваших руках.</p>
+                        </div>
+                        <div class="modding-card">
+                            <span class="icon">🤝</span>
+                            <h4>Сообщество</h4>
+                            <p>Делитесь модами, сотрудничайте и развивайтесь вместе.</p>
+                        </div>
+                        <div class="modding-card">
+                            <span class="icon">🎵</span>
+                            <h4>Таунт музыка</h4>
+                            <p>Добавляйте кастомную музыку и звуковые эффекты.</p>
+                        </div>
+                        <div class="modding-card">
+                            <span class="icon">🤖</span>
+                            <h4>ИИ поведения</h4>
+                            <p>Программируйте поведение NPC и существ.</p>
+                        </div>
+                        <div class="modding-card">
+                            <span class="icon">💰</span>
+                            <h4>Экономика</h4>
+                            <p>Создавайте новые валюты и торговые системы.</p>
+                        </div>
+                        <div class="modding-card">
+                            <span class="icon">🖥️</span>
+                            <h4>Мультиплеер моды</h4>
+                            <p>Расширяйте возможности онлайн-игр.</p>
+                        </div>
+                        <div class="modding-card">
+                            <span class="icon">🎨</span>
+                            <h4>Графика</h4>
+                            <p>Кастомизированные текстуры, эффекты и анимации.</p>
+                        </div>
+                        <div class="modding-card">
+                            <span class="icon">📜</span>
+                            <h4>Квесты</h4>
+                            <p>Создавайте уникальные квесты и сюжетные линии.</p>
+                        </div>
+                        <div class="modding-card">
+                            <span class="icon">💼</span>
+                            <h4>Инвентарь</h4>
+                            <p>Расширяйте предметы и их свойства.</p>
+                        </div>
+                        <div class="modding-card">
+                            <span class="icon">⚙️</span>
+                            <h4>Рецепты</h4>
+                            <p>Добавляйте новые способы крафта.</p>
+                        </div>
+                        <div class="modding-card">
+                            <span class="icon">👗</span>
+                            <h4>Скины</h4>
+                            <p>Кастомные скины для предметов и персонажей.</p>
+                        </div>
+                        <div class="modding-card">
+                            <span class="icon">✨</span>
+                            <h4>И многое другое</h4>
+                            <p>Безграничные возможности для творчества в Hytale.</p>
+                        </div>
+                    </div>
+                    <p>
+                        Hytale – это платформа для всех. Независимо от вашего опыта, вы найдете инструменты,
+                        которые позволят воплотить идеи в жизнь. От простых текстур до полноценных модпаков –
+                        сообщество Hytale создаст бесконечное количество контента.
+                    </p>
+                    <p>
+                        Присоединяйтесь к революции модинга в Hytale и станьте частью чего-то большего!
+                    </p>
+                </div>
+            </div>
         </div>
-        <div class="card feature">
-          <h3>Динамические битвы</h3>
-          <p>Сражения с опасными тварями, масштабные осады замков и эпические PvP-арены.</p>
-        </div>
-        <div class="card feature">
-          <h3>Скрипты и моды</h3>
-          <p>Создавайте собственные механики, предметы и задания с помощью встроенного скриптового движка.</p>
-        </div>
-        <div class="card feature">
-          <h3>Творчество</h3>
-          <p>Стройте всё, что сможете вообразить: от простых домов до целых империй.</p>
-        </div>
-      </div>
     </section>
 
-    <!-- Invite Popup -->
-    <div id="invitePopup" class="invite-popup">
-      <h4>Присоединяйтесь в Discord!</h4>
-      <p>Общайтесь с другими фанатами, получайте поддержку и участвуйте в мероприятиях.</p>
-      <a href="https://discord.gg/hq2Vseee5K" target="_blank">В Discord</a>
+    <section id="screenshots" class="screenshots">
+        <h2>Скриншоты игры</h2>
+        <div class="gallery">
+            <img src="img/sr/001.jpg" alt="Hytale Screenshot 1" class="gallery-img" data-src="img/sr/001.jpg" />
+            <img src="img/sr/002.jpg" alt="Hytale Screenshot 2" class="gallery-img" data-src="img/sr/002.jpg" />
+            <img src="img/sr/003.jpg" alt="Hytale Screenshot 3" class="gallery-img" data-src="img/sr/003.jpg" />
+            <img src="img/sr/004.jpg" alt="Hytale Screenshot 4" class="gallery-img" data-src="img/sr/004.jpg" />
+            <img src="img/sr/005.jpg" alt="Hytale Screenshot 5" class="gallery-img" data-src="img/sr/005.jpg" />
+            <img src="img/sr/006.jpg" alt="Hytale Screenshot 6" class="gallery-img" data-src="img/sr/006.jpg" />
+            <img src="img/sr/007.jpg" alt="Hytale Screenshot 7" class="gallery-img" data-src="img/sr/007.jpg" />
+            <img src="img/sr/008.jpg" alt="Hytale Screenshot 8" class="gallery-img" data-src="img/sr/008.jpg" />
+            <img src="img/sr/009.jpg" alt="Hytale Screenshot 9" class="gallery-img" data-src="img/sr/009.jpg" />
+        </div>
+        <div id="modal" class="modal">
+            <span class="close">&times;</span>
+            <img class="modal-content" id="modal-img">
+        </div>
+    </section>
+
+    <section id="videos" class="videos">
+        <h2>Видео об игре</h2>
+        <video id="local-video" controls width="600" height="338">
+            <source src="video/hytalestart.mp4" type="video/mp4">
+            Ваш браузер не поддерживает видео.
+        </video>
+        <p>Посмотрите официальный трейлер Hytale и погрузитесь в атмосферу!</p>
+    </section>
+
+    <section id="download" class="download">
+        <h2>Скачать Hytale</h2>
+        <div class="tabs">
+            <div class="tab-buttons">
+                <button class="tab-btn active" data-tab="launcher">Лаунчер</button>
+                <button class="tab-btn" data-tab="direct">Прямая загрузка</button>
+            </div>
+            <div class="tab-content">
+                <div id="launcher" class="tab-pane active">
+                    <div class="download-card">
+                        <div class="card-icon large">🚀</div>
+                        <h3>Лаунчер Hytale</h3>
+                        <p>Рекомендуемый способ. Автоматические обновления и простая установка.</p>
+                        <button class="download-btn primary" id="download-launcher-btn">Скачать лаунчер</button>
+                    </div>
+                </div>
+                <div id="direct" class="tab-pane">
+                    <div class="download-card">
+                        <div class="card-icon large">💾</div>
+                        <h3>Прямая загрузка игры</h3>
+                        <p>Выберите операционную систему и разрядность.</p>
+                        <form id="direct-form" class="download-form">
+                            <div class="select-row">
+                                <div class="select-group">
+                                    <label for="os-select">ОС</label>
+                                    <select id="os-select" required>
+                                        <option value="" disabled selected>Выберите</option>
+                                        <option value="windows">Windows</option>
+                                        <option value="mac">macOS</option>
+                                        <option value="linux">Linux</option>
+                                    </select>
+                                </div>
+                                <div class="select-group">
+                                    <label for="arch-select">Разрядность</label>
+                                    <select id="arch-select" required disabled>
+                                        <option value="" disabled selected>Выберите</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <button type="submit" class="download-btn primary" id="download-direct-btn" disabled>Скачать</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+
+    <!-- Popup Modal for Discord -->
+    <div id="discord-popup" class="popup-modal">
+        <div class="popup-container">
+            <button class="popup-close">×</button>
+            <div class="popup-header">
+                <h2>🚨 СТОЙ! СТОЙ! ПОГОДИ!</h2>
+            </div>
+            <div class="popup-body">
+                <p>Ты настоящий фанат Hytale? Тогда наш Discord - твое истинное место! Здесь собраны лучшие моддеры, геймеры и энтузиасты. Не упусти шанс быть в центре событий и получить доступ к премиум контенту, который не найти больше нигде!</p>
+                <p><strong>Что тебя ждет:</strong></p>
+                <ul>
+                    <li>🚀 Эксклюзивный лаунчер с автообновлениями и премиум функциями</li>
+                    <li>🛠️ Уникальные моды, созданные сообществом лучших разработчиков</li>
+                    <li>📢 Самые свежие новости и инсайдерская информация прямо от команды</li>
+                    <li>🤝 Платформа для обмена идеями, статьями и пользовательским контентом</li>
+                </ul>
+                <p>Присоединяйся прямо сейчас и стань частью легендарного сообщества Hytale! Это не просто чат - это твое новое хобби и источник вдохновения. Не жди - место заканчивается!</p>
+            </div>
+            <div class="popup-footer">
+                <a href="https://discord.gg/J68Yjgjf" target="_blank" class="popup-discord-navbar-btn">
+                    <span class="btn-icon">🚀</span> Присоединиться
+                </a>
+            </div>
+        </div>
     </div>
 
-    <!-- Footer -->
-    <footer>&copy; 2025 Hytale Fan Page. Все права неофициального сайта принадлежат Hypixel Studios.</footer>
-  </div>
-
-  <script>
-    // Скрыть preloader и показать контент
-    window.addEventListener('load', () => {
-      document.getElementById('preloader').style.display='none';
-      document.getElementById('content').style.display='block';
-      initCountdown();
-      if(!localStorage.getItem('visited')){
-        document.getElementById('notice').style.display='flex';
-        localStorage.setItem('visited','true');
-      }
-      setInterval(() => {
-        const p = document.getElementById('invitePopup');
-        p.classList.add('show');
-        setTimeout(() => p.classList.remove('show'), 8000);
-      }, 20000);
-    });
-
-    function initCountdown(){
-      const els = {
-        days: document.getElementById('days'),
-        hours: document.getElementById('hours'),
-        minutes: document.getElementById('minutes'),
-        seconds: document.getElementById('seconds')
-      };
-      const target = new Date('July 15, 2025 00:00:00').getTime();
-      function update(){
-        const now=Date.now(),diff=target-now;
-        if(diff<0) return clearInterval(i);
-        const d=Math.floor(diff/86400000),
-              h=Math.floor((diff%86400000)/3600000),
-              m=Math.floor((diff%3600000)/60000),
-              s=Math.floor((diff%60000)/1000);
-        animate(els.days,`${String(d).padStart(2,'0')}д`);
-        animate(els.hours,`${String(h).padStart(2,'0')}ч`);
-        animate(els.minutes,`${String(m).padStart(2,'0')}м`);
-        animate(els.seconds,`${String(s).padStart(2,'0')}с`);
-      }
-      const i=setInterval(update,1000);
-      update();
-    }
-    function animate(el,val){
-      if(el.innerText!==val){
-        el.classList.add('change');
-        setTimeout(()=>{
-          el.innerText=val;
-          el.classList.remove('change');
-        },200);
-      }
-    }
-    function scrollToDownload(){document.querySelector('.download-section').scrollIntoView({behavior:'smooth'});}
-    function scrollToNews(){document.querySelector('.news-section').scrollIntoView({behavior:'smooth'});}
-    function openModal(){document.getElementById('newsModal').style.display='flex';}
-    function closeModal(){document.getElementById('newsModal').style.display='none';}
-    function closeNotice(){const n=document.getElementById('notice');n.classList.add('hidden');setTimeout(()=>n.style.display='none',400);}
-  </script>
+    <script src="script.js"></script>
 </body>
 </html>
