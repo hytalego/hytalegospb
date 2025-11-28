@@ -1,12 +1,12 @@
 // Первый таймер: до старта предзаказа
-const preorderDate = new Date('December 13, 2025 00:00:00 GMT+3');
+const preorderDate = new Date(2025, 11, 13, 0, 0, 0); // December 13, 2025, 00:00:00
 const preorderDaysElement = document.getElementById('preorder-days');
 const preorderHoursElement = document.getElementById('preorder-hours');
 const preorderMinutesElement = document.getElementById('preorder-minutes');
 const preorderSecondsElement = document.getElementById('preorder-seconds');
 
 // Второй таймер: до выхода игры
-const releaseDate = new Date('January 13, 2026 00:00:00 GMT+3');
+const releaseDate = new Date(2026, 0, 13, 0, 0, 0); // January 13, 2026, 00:00:00
 const releaseDaysElement = document.getElementById('release-days');
 const releaseHoursElement = document.getElementById('release-hours');
 const releaseMinutesElement = document.getElementById('release-minutes');
