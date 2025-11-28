@@ -228,12 +228,17 @@ document.querySelector('.modding-special').addEventListener('click', () => {
 
 // Release popup при загрузке страницы
 const releasePopup = document.getElementById('release-popup');
+console.log('releasePopup found:', !!releasePopup, releasePopup);
 
-window.addEventListener('load', () => {
-    setTimeout(() => {
+setTimeout(() => {
+    console.log('Attempting to show popup');
+    if (releasePopup) {
+        console.log('Setting display to block');
         releasePopup.style.display = 'block';
-    }, 1000); // Показать через 1 секунду после загрузки
-});
+    } else {
+        console.log('releasePopup is null, element not found');
+    }
+}, 1000); // Показать через 1 секунду
 
 // Закрытие release popup
 const releaseCloseBtn = releasePopup.querySelector('.popup-close');
