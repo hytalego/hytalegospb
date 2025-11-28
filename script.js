@@ -228,11 +228,9 @@ document.querySelector('.modding-special').addEventListener('click', () => {
 
 // Release popup при загрузке страницы
 const releasePopup = document.getElementById('release-popup');
-console.log('releasePopup found:', !!releasePopup, releasePopup);
 
 if (releasePopup) {
     setTimeout(() => {
-        console.log('Attempting to show popup');
         releasePopup.style.display = 'block';
     }, 1000); // Показать через 1 секунду
 
@@ -256,6 +254,4 @@ if (releasePopup) {
     if (releaseCloseBtn) {
         releaseCloseBtn.addEventListener('click', closeReleasePopup);
     }
-} else {
-    console.log('Release popup element not found, skipping popup functionality');
 }
