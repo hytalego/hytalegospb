@@ -580,3 +580,166 @@ footer{
         opacity: 0;
     }
 }
+
+/* ────────────────────────── SNOW EFFECT ───────────────────── */
+#snow-container {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: 1;
+    overflow: hidden;
+}
+
+.snowflake {
+    position: absolute;
+    background: white;
+    border-radius: 50%;
+    opacity: 0.8;
+    animation: fall linear infinite;
+}
+
+@keyframes fall {
+    0% {
+        transform: translateY(-10px) rotate(0deg);
+        opacity: 0;
+    }
+    10% {
+        opacity: 0.8;
+    }
+    90% {
+        opacity: 0.8;
+    }
+    100% {
+        transform: translateY(100vh) rotate(360deg);
+        opacity: 0;
+    }
+}
+
+/* ────────────────────────── CHRISTMAS TREE ───────────────────── */
+#christmas-tree {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    width: 100px;
+    height: 140px;
+    z-index: 1001;
+    pointer-events: none;
+}
+
+.star {
+    position: absolute;
+    top: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    color: #FFD700;
+    font-size: 24px;
+    text-shadow: 0 0 5px #FFD700;
+    z-index: 2;
+}
+
+.branch {
+    position: absolute;
+    background: #228B22;
+    clip-path: polygon(50% 0%, 0% 100%, 100% 100%);
+}
+
+.b1 {
+    width: 80px;
+    height: 50px;
+    bottom: 30px;
+    left: 10px;
+    background: #32CD32;
+}
+
+.b2 {
+    width: 70px;
+    height: 45px;
+    bottom: 55px;
+    left: 15px;
+    background: #228B22;
+}
+
+.b3 {
+    width: 60px;
+    height: 40px;
+    bottom: 70px;
+    left: 20px;
+    background: #006400;
+}
+
+.b4 {
+    width: 50px;
+    height: 35px;
+    bottom: 85px;
+    left: 25px;
+    background: #228B22;
+}
+
+.tree-trunk {
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 10px;
+    height: 30px;
+    background: #8B4513;
+    border-radius: 2px;
+}
+
+.garland {
+    position: absolute;
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    animation: garlandBlink 1.5s infinite;
+}
+
+.g1 {
+    background: #FF0000;
+    bottom: 50px;
+    left: 20px;
+    animation-delay: 0s;
+}
+
+.g2 {
+    background: #00FF00;
+    bottom: 65px;
+    left: 45px;
+    animation-delay: 0.3s;
+}
+
+.g3 {
+    background: #FFFF00;
+    bottom: 80px;
+    left: 30px;
+    animation-delay: 0.6s;
+}
+
+.g4 {
+    background: #FF1493;
+    bottom: 45px;
+    left: 60px;
+    animation-delay: 0.9s;
+}
+
+.g5 {
+    background: #00FFFF;
+    bottom: 70px;
+    left: 60px;
+    animation-delay: 1.2s;
+}
+
+.g6 {
+    background: #FFA500;
+    bottom: 90px;
+    left: 40px;
+    animation-delay: 1.5s;
+}
+
+@keyframes garlandBlink {
+    0%, 50% { opacity: 1; transform: scale(1); }
+    51%, 100% { opacity: 0.4; transform: scale(0.8); }
+}

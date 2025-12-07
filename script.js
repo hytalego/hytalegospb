@@ -6,7 +6,7 @@ const preorderMinutesElement = document.getElementById('preorder-minutes');
 const preorderSecondsElement = document.getElementById('preorder-seconds');
 
 // Второй таймер: до выхода игры
-const releaseDate = new Date(2026, 0, 13, 0, 0, 0); // January 13, 2026, 00:00:00
+const releaseDate = new Date(2026, 0, 13, 18, 0, 0); // January 13, 2026, 18:00:00
 const releaseDaysElement = document.getElementById('release-days');
 const releaseHoursElement = document.getElementById('release-hours');
 const releaseMinutesElement = document.getElementById('release-minutes');
@@ -255,3 +255,43 @@ if (releasePopup) {
         releaseCloseBtn.addEventListener('click', closeReleasePopup);
     }
 }
+
+// Функция для создания снежинок
+function createSnowflakes() {
+    const snowContainer = document.getElementById('snow-container');
+    const numberOfSnowflakes = 50; // Количество снежинок
+
+    for (let i = 0; i < numberOfSnowflakes; i++) {
+        const snowflake = document.createElement('div');
+        snowflake.classList.add('snowflake');
+
+        // Случайный размер снежинки
+        const size = Math.random() * 5 + 2; // От 2px до 7px
+        snowflake.style.width = `${size}px`;
+        snowflake.style.height = `${size}px`;
+
+        // Случайная позиция по горизонтали
+        snowflake.style.left = `${Math.random() * 100}%`;
+
+        // Случайная продолжительность анимации
+        const duration = Math.random() * 10 + 10; // От 10s до 20s
+        snowflake.style.animationDuration = `${duration}s`;
+
+        // Случайная задержка анимации
+        const delay = Math.random() * 10; // От 0s до 10s
+        snowflake.style.animationDelay = `${delay}s`;
+
+        snowContainer.appendChild(snowflake);
+
+        // Удаляем снежинку после завершения анимации
+        snowflake.addEventListener('animationend', () => {
+            snowflake.remove();
+        });
+    }
+
+    // Повторяем создание снежинок каждые 5 секунд
+    setTimeout(createSnowflakes, 5000);
+}
+
+// Запускаем создание снежинок при загрузке страницы
+createSnowflakes();
