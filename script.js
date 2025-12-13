@@ -1,5 +1,5 @@
 // Первый таймер: до старта предзаказа
-const preorderDate = new Date(2025, 11, 13, 0, 0, 0); // December 13, 2025, 00:00:00
+const preorderDate = new Date(2025, 11, 13, 18, 0, 0); // December 13, 2025, 18:00:00
 const preorderDaysElement = document.getElementById('preorder-days');
 const preorderHoursElement = document.getElementById('preorder-hours');
 const preorderMinutesElement = document.getElementById('preorder-minutes');
@@ -259,7 +259,7 @@ if (releasePopup) {
 // Функция для создания снежинок
 function createSnowflakes() {
     const snowContainer = document.getElementById('snow-container');
-    const numberOfSnowflakes = 50; // Количество снежинок
+    const numberOfSnowflakes = 5; // Добавляем 5 снежинок каждые 5 секунд
 
     for (let i = 0; i < numberOfSnowflakes; i++) {
         const snowflake = document.createElement('div');
