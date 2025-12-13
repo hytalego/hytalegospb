@@ -256,42 +256,41 @@ if (releasePopup) {
     }
 }
 
-// Функция для создания снежинок
-function createSnowflakes() {
-    const snowContainer = document.getElementById('snow-container');
-    const numberOfSnowflakes = 5; // Добавляем 5 снежинок каждые 5 секунд
 
-    for (let i = 0; i < numberOfSnowflakes; i++) {
-        const snowflake = document.createElement('div');
-        snowflake.classList.add('snowflake');
 
-        // Случайный размер снежинки
-        const size = Math.random() * 5 + 2; // От 2px до 7px
-        snowflake.style.width = `${size}px`;
-        snowflake.style.height = `${size}px`;
+// Функция для создания салюта
+function createFireworks() {
+    const fireworksContainer = document.getElementById('fireworks-container');
+    const numberOfFireworks = 3; // Добавляем 3 салюта каждые 10 секунд
 
-        // Случайная позиция по горизонтали
-        snowflake.style.left = `${Math.random() * 100}%`;
+    for (let i = 0; i < numberOfFireworks; i++) {
+        const firework = document.createElement('div');
+        firework.classList.add('firework');
 
-        // Случайная продолжительность анимации
-        const duration = Math.random() * 10 + 10; // От 10s до 20s
-        snowflake.style.animationDuration = `${duration}s`;
+        // Случайный цвет
+        const colors = ['#FF0000', '#00FF00', '#FFFF00', '#FF1493', '#00FFFF', '#FFA500', '#FF4500'];
+        firework.style.backgroundColor = colors[Math.floor(Math.random() * colors.length)];
 
-        // Случайная задержка анимации
-        const delay = Math.random() * 10; // От 0s до 10s
-        snowflake.style.animationDelay = `${delay}s`;
+        // Случайный размер
+        const size = Math.random() * 20 + 10; // От 10px до 30px
+        firework.style.width = `${size}px`;
+        firework.style.height = `${size}px`;
 
-        snowContainer.appendChild(snowflake);
+        // Случайная позиция
+        firework.style.left = `${Math.random() * 100}%`;
+        firework.style.top = `${Math.random() * 50}%`; // В верхней половине
 
-        // Удаляем снежинку после завершения анимации
-        snowflake.addEventListener('animationend', () => {
-            snowflake.remove();
+        fireworksContainer.appendChild(firework);
+
+        // Удаляем салют после завершения анимации
+        firework.addEventListener('animationend', () => {
+            firework.remove();
         });
     }
 
-    // Повторяем создание снежинок каждые 5 секунд
-    setTimeout(createSnowflakes, 5000);
+    // Повторяем создание салюта каждые 10 секунд
+    setTimeout(createFireworks, 10000);
 }
 
-// Запускаем создание снежинок при загрузке страницы
-createSnowflakes();
+// Запускаем салют при загрузке страницы
+createFireworks();
