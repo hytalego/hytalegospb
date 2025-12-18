@@ -139,8 +139,8 @@ downloadLauncherBtn.addEventListener('click', (e) => {
     fetch('/file/l.zip', { method: 'HEAD' })
         .then(response => {
             if (response.ok) {
-                // Файл найден, скачиваем
-                window.location.href = '/file/l.zip';
+                // Файл найден, перенаправляем на страницу скачивания
+                window.location.href = 'download.html';
             } else {
                 // Файл не найден, перенаправляем на страницу ошибки
                 window.location.href = 'error.html';
