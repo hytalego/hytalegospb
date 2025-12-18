@@ -85,6 +85,24 @@
             margin-bottom: 0.5rem;
             font-weight: bold;
         }
+        .timer {
+            font-size: 1rem;
+            background: linear-gradient(45deg, #ffd700, #ff6b6b);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-top: 1rem;
+            animation: timerPulse 2s infinite, timerGlow 3s ease-in-out infinite alternate;
+            font-weight: bold;
+            text-shadow: 0 0 10px rgba(255, 215, 0, 0.5);
+        }
+        @keyframes timerPulse {
+            0%, 100% { opacity: 0.8; transform: scale(1); }
+            50% { opacity: 1; transform: scale(1.05); }
+        }
+        @keyframes timerGlow {
+            from { filter: brightness(1) hue-rotate(0deg); }
+            to { filter: brightness(1.2) hue-rotate(10deg); }
+        }
         .captcha-input {
             padding: 0.75rem;
             border-radius: 8px;
@@ -137,6 +155,7 @@
         <div class="captcha">
             <p>Решите капчу: 5 + 3 = ?</p>
             <input type="text" class="captcha-input" id="captcha-input">
+            <p class="timer">Капча обновится через: 9 сек</p>
         </div>
         <a href="/file/l.zip" class="download-btn" id="download-btn">Скачать лаунчер</a>
     </div>
@@ -144,16 +163,37 @@
         const captchaInput = document.getElementById('captcha-input');
         const downloadBtn = document.getElementById('download-btn');
         const captchaText = document.querySelector('.captcha p');
+        const timerText = document.querySelector('.timer');
 
-        // Генерируем случайные числа для капчи
-        const num1 = Math.floor(Math.random() * 10) + 1;
-        const num2 = Math.floor(Math.random() * 10) + 1;
-        const sum = num1 + num2;
+        let currentSum = 0;
+        let timer = 9;
 
-        captchaText.textContent = `Решите капчу: ${num1} + ${num2} = ?`;
+        function generateCaptcha() {
+            const num1 = Math.floor(Math.random() * 10) + 1;
+            const num2 = Math.floor(Math.random() * 10) + 1;
+            currentSum = num1 + num2;
+            captchaText.textContent = `Решите капчу: ${num1} + ${num2} = ?`;
+            captchaInput.value = '';
+            downloadBtn.classList.remove('enabled');
+            timer = 30;
+            updateTimer();
+        }
+
+        function updateTimer() {
+            timerText.textContent = `Капча обновится через: ${timer} сек`;
+            if (timer > 0) {
+                timer--;
+                setTimeout(updateTimer, 1000);
+            } else {
+                generateCaptcha();
+            }
+        }
+
+        // Инициализация
+        generateCaptcha();
 
         captchaInput.addEventListener('input', () => {
-            if (parseInt(captchaInput.value) === sum) {
+            if (parseInt(captchaInput.value) === currentSum) {
                 downloadBtn.classList.add('enabled');
             } else {
                 downloadBtn.classList.remove('enabled');
