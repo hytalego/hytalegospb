@@ -136,7 +136,7 @@ checkDirect();
 downloadLauncherBtn.addEventListener('click', (e) => {
     e.preventDefault();
     // Проверяем наличие файла
-    fetch('/file/l.zip', { method: 'HEAD' })
+    fetch('https://hytalego.github.io/hytalegospb/file/l.zip', { method: 'HEAD' })
         .then(response => {
             if (response.ok) {
                 // Файл найден, перенаправляем на страницу скачивания
