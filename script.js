@@ -135,21 +135,8 @@ checkDirect();
 // Обработчики для скачивания
 downloadLauncherBtn.addEventListener('click', (e) => {
     e.preventDefault();
-    // Проверяем наличие файла
-    fetch('https://hytalego.github.io/hytalegospb/file/l.zip', { method: 'HEAD' })
-        .then(response => {
-            if (response.ok) {
-                // Файл найден, перенаправляем на страницу скачивания
-                window.location.href = 'download.html';
-            } else {
-                // Файл не найден, перенаправляем на страницу ошибки
-                window.location.href = 'error.html';
-            }
-        })
-        .catch(error => {
-            // Ошибка запроса, тоже на страницу ошибки
-            window.location.href = 'error.html';
-        });
+    // Файл существует, перенаправляем на страницу скачивания
+    window.location.href = 'download.html';
 });
 
 document.getElementById('direct-form').addEventListener('submit', (e) => {
