@@ -209,25 +209,35 @@
             document.querySelectorAll('.video-content').forEach(el => el.style.display = 'none');
         }
 
+        function hash(str) {
+            let hash = 0;
+            for (let i = 0; i < str.length; i++) {
+                const char = str.charCodeAt(i);
+                hash = ((hash << 5) - hash) + char;
+                hash = hash & hash; // Convert to 32bit integer
+            }
+            return hash.toString();
+        }
+
         function checkPassword() {
             const password = document.getElementById('password-input').value;
             const passwords = {
-                'stupid-as-teapot': '728-491-365',
-                'first-steps': '159-263-487',
-                'first-emotions': '624-837-951',
-                'random-mods': '473-918-205',
-                'community-mods': '836-192-547',
-                'humor-mods': '295-648-173',
-                'stupid-teapot': '841-926-357',
-                'dream-brushes': '517-384-692',
-                'how-to-get-code': '763-429-185',
-                'code-duration': '946-571-238',
-                'free-code': '382-695-147',
-                'video-leak': '514-827-369'
+                'stupid-as-teapot': '728491365',
+                'first-steps': '159263487',
+                'first-emotions': '624837951',
+                'random-mods': '473918205',
+                'community-mods': '836192547',
+                'humor-mods': '295648173',
+                'stupid-teapot': '841926357',
+                'dream-brushes': '517384692',
+                'how-to-get-code': '763429185',
+                'code-duration': '946571238',
+                'free-code': '382695147',
+                'video-leak': '514827369'
             };
             const input = document.getElementById('password-input');
             const errorMsg = document.getElementById('error-message');
-            if (password === passwords[currentContent]) {
+            if (hash(password) === passwords[currentContent]) {
                 document.querySelectorAll('.video-content').forEach(el => el.style.display = 'none');
                 document.getElementById(currentContent).style.display = 'block';
                 closeModal();
