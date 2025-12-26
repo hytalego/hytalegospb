@@ -183,3 +183,24 @@ document.querySelector('.modding-special').addEventListener('click', () => {
         document.querySelector('.modding-special').classList.remove('animate');
     }, 500);
 });
+
+// Warning Modal
+const warningModal = document.getElementById('warning-modal');
+const warningClose = document.getElementsByClassName('warning-close')[0];
+
+// Show modal on page load
+document.addEventListener('DOMContentLoaded', () => {
+    warningModal.style.display = 'block';
+});
+
+// Close modal when clicking close button
+warningClose.addEventListener('click', () => {
+    warningModal.style.display = 'none';
+});
+
+// Close modal when clicking outside
+warningModal.addEventListener('click', (e) => {
+    if (e.target === warningModal) {
+        warningModal.style.display = 'none';
+    }
+});

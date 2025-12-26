@@ -128,9 +128,7 @@
             font-size: 14px;
         }
 
-        .header {
-            margin-top: 50px;
-        }
+
 
         @media (max-width: 768px) {
             .timers-container {
@@ -148,7 +146,6 @@
     </style>
 </head>
 <body>
-    <div class="warning-banner">Осторожно сайт https://hytalegoo.github.io/hytalegospb/ это фейк. Не в ком случаее не переходите на него. все официальные ссылки доступны на https://github.com/hytalego/hytalegospb</div>
     <header class="header">
         <div class="logo"><img src="data/img/logo.png" alt="Hytale Logo"></div>
         <nav>
@@ -440,6 +437,36 @@
 
 
 
+
+    <!-- Warning Modal -->
+    <div id="warning-modal" class="warning-modal">
+        <div class="warning-modal-content">
+            <span class="warning-close">&times;</span>
+            <h2>Важное предупреждение</h2>
+            <p><strong>⚠️ Осторожно:</strong> сайт <span class="highlight">https://hytalegoo.github.io/hytalegospb/</span> это <strong>фейк</strong>. <strong>Не в коем случае не переходите на него!</strong></p>
+            <p><strong>Все официальные ссылки доступны на:</strong> <a href="https://github.com/hytalego/hytalegospb" target="_blank" class="modal-link">https://github.com/hytalego/hytalegospb</a></p>
+            <p><strong>Мы продаём только наш собственный контент.</strong> Весь наш уникальный контент, включая моды, видео и другие материалы, созданные нашей командой, доступен для приобретения. <strong>Все чужие моды и материалы распространяются абсолютно бесплатно.</strong> Мы не берём деньги за сторонний контент и предоставляем его без каких-либо ограничений для нашего сообщества.</p>
+        </div>
+    </div>
+
+    <script>
+        // Warning Modal inline
+        const warningModal = document.getElementById('warning-modal');
+        const warningClose = document.getElementsByClassName('warning-close')[0];
+
+        // Show immediately
+        warningModal.style.display = 'block';
+
+        warningClose.addEventListener('click', () => {
+            warningModal.style.display = 'none';
+        });
+
+        warningModal.addEventListener('click', (e) => {
+            if (e.target === warningModal) {
+                warningModal.style.display = 'none';
+            }
+        });
+    </script>
 
     <div id="snow-container"></div>
     <script src="script.js"></script>
