@@ -5,9 +5,7 @@ const releaseHoursElement = document.getElementById('release-hours');
 const releaseMinutesElement = document.getElementById('release-minutes');
 const releaseSecondsElement = document.getElementById('release-seconds');
 
-if (!releaseDaysElement || !releaseHoursElement || !releaseMinutesElement || !releaseSecondsElement) {
-    alert('Timer elements not found');
-}
+
 
 let isInitial = true;
 
