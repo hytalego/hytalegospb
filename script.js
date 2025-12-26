@@ -10,6 +10,7 @@ let isInitial = true;
 function updateReleaseTimer() {
     const now = new Date();
     const timeDifference = releaseDate - now;
+    alert('Timer update: ' + timeDifference);
     if (timeDifference > 0) {
         const days = Math.floor(timeDifference / (1000 * 60 * 60 * 24));
         const hours = Math.floor((timeDifference % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
