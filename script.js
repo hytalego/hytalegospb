@@ -26,13 +26,11 @@ function updateReleaseTimer() {
         if (minutes !== oldMinutes) releaseMinutesElement.classList.add('flip');
         if (seconds !== oldSeconds) releaseSecondsElement.classList.add('flip');
 
-        // Обновить текст в середине анимации (250ms)
-        setTimeout(() => {
-            releaseDaysElement.textContent = days;
-            releaseHoursElement.textContent = hours;
-            releaseMinutesElement.textContent = minutes;
-            releaseSecondsElement.textContent = seconds;
-        }, 250);
+        // Обновить текст сразу
+        releaseDaysElement.textContent = days;
+        releaseHoursElement.textContent = hours;
+        releaseMinutesElement.textContent = minutes;
+        releaseSecondsElement.textContent = seconds;
 
         // Убрать класс через 500ms
         setTimeout(() => {
