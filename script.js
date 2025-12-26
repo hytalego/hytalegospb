@@ -1,5 +1,4 @@
 // Таймер: до выхода игры
-alert('Script loaded');
 const releaseDate = new Date(2026, 0, 13, 18, 0, 0); // January 13, 2026, 18:00:00
 const releaseDaysElement = document.getElementById('release-days');
 const releaseHoursElement = document.getElementById('release-hours');
@@ -15,7 +14,6 @@ let isInitial = true;
 function updateReleaseTimer() {
     const now = new Date();
     const timeDifference = releaseDate - now;
-    alert('Timer update: ' + timeDifference);
     if (timeDifference > 0) {
         const days = Math.floor(timeDifference / (1000 * 60 * 60 * 24));
         const hours = Math.floor((timeDifference % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
