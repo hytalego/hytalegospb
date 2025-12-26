@@ -196,10 +196,8 @@ document.querySelector('.modding-special').addEventListener('click', () => {
 const warningModal = document.getElementById('warning-modal');
 const warningClose = document.getElementsByClassName('warning-close')[0];
 
-// Show modal on page load
-document.addEventListener('DOMContentLoaded', () => {
-    warningModal.style.display = 'block';
-});
+// Show modal immediately
+warningModal.style.display = 'block';
 
 // Close modal when clicking close button
 warningClose.addEventListener('click', () => {

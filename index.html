@@ -449,24 +449,7 @@
         </div>
     </div>
 
-    <script>
-        // Warning Modal inline
-        const warningModal = document.getElementById('warning-modal');
-        const warningClose = document.getElementsByClassName('warning-close')[0];
 
-        // Show immediately
-        warningModal.style.display = 'block';
-
-        warningClose.addEventListener('click', () => {
-            warningModal.style.display = 'none';
-        });
-
-        warningModal.addEventListener('click', (e) => {
-            if (e.target === warningModal) {
-                warningModal.style.display = 'none';
-            }
-        });
-    </script>
 
     <div id="snow-container"></div>
     <script src="script.js"></script>
