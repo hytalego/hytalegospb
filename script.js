@@ -32,10 +32,10 @@ function updateReleaseTimer() {
 
         // Обновить текст в середине анимации (250ms)
         setTimeout(() => {
-            releaseDaysElement.textContent = days;
-            releaseHoursElement.textContent = hours;
-            releaseMinutesElement.textContent = minutes;
-            releaseSecondsElement.textContent = seconds;
+            releaseDaysElement.textContent = days.toString().padStart(2, '0');
+            releaseHoursElement.textContent = hours.toString().padStart(2, '0');
+            releaseMinutesElement.textContent = minutes.toString().padStart(2, '0');
+            releaseSecondsElement.textContent = seconds.toString().padStart(2, '0');
         }, 250);
 
         // Убрать класс через 500ms
@@ -48,10 +48,10 @@ function updateReleaseTimer() {
 
         isInitial = false;
     } else {
-        releaseDaysElement.textContent = '0';
-        releaseHoursElement.textContent = '0';
-        releaseMinutesElement.textContent = '0';
-        releaseSecondsElement.textContent = '0';
+        releaseDaysElement.textContent = '00';
+        releaseHoursElement.textContent = '00';
+        releaseMinutesElement.textContent = '00';
+        releaseSecondsElement.textContent = '00';
         document.getElementById('release-timer').innerHTML = '<span class="final-msg">Игра вышла!</span>';
         document.querySelector('.final-msg').style.animation = 'celebrate 2s infinite';
     }
