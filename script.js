@@ -1,4 +1,5 @@
 // Таймер: до выхода игры
+alert('Script loaded');
 const releaseDate = new Date(2026, 0, 13, 18, 0, 0); // January 13, 2026, 18:00:00
 const releaseDaysElement = document.getElementById('release-days');
 const releaseHoursElement = document.getElementById('release-hours');
