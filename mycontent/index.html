@@ -9,7 +9,9 @@
         .container{display:flex;min-height:100vh;}
         .sidebar{width:250px;background:#2c3e50;color:#ecf0f1;padding:20px;text-align:center;}
         .sidebar img{width:100%;margin-bottom:20px;}
-        .sidebar h2{margin-bottom:20px;}
+        .sidebar h2{margin-bottom:10px;}
+        .access-btn{background:linear-gradient(45deg, #3498db, #2980b9);color:white;border:none;padding:10px 15px;border-radius:8px;font-size:1rem;cursor:pointer;margin-bottom:20px;transition:transform 0.3s;}
+        .access-btn:hover{transform:scale(1.05);}
         .menu ul{list-style:none;}
         .menu li{margin-bottom:10px;}
         .menu button{background:none;border:none;color:#ecf0f1;text-align:left;width:100%;padding:10px;cursor:pointer;}
@@ -40,6 +42,24 @@
         .shake { animation: shake 0.5s; }
         .video-content{display:none;}
         .video-content iframe{width:100%;height:400px;border:none;}
+        .video-content h2{background:linear-gradient(45deg, #1e1e1e, #2c3e50);color:#fff;padding:15px 20px;border-radius:15px;margin-bottom:20px;text-align:center;font-size:2rem;text-shadow:2px 2px 4px rgba(0,0,0,0.5);box-shadow:0 4px 15px rgba(0,0,0,0.3);}
+        .video-panels{display:flex;flex-wrap:wrap;gap:20px;justify-content:center;}
+        .video-panel{background:#fff;border-radius:15px;padding:15px;box-shadow:0 8px 20px rgba(0,0,0,0.15);border:2px solid #3498db;width:calc(33% - 20px);min-width:300px;transition:transform 0.3s, box-shadow 0.3s;}
+        .video-panel:hover{transform:translateY(-5px);box-shadow:0 12px 30px rgba(52, 152, 219, 0.3);}
+        .video-panel iframe{height:250px;border-radius:10px;margin-bottom:10px;}
+        .panel-info h3{font-size:1.2rem;color:#2c3e50;margin-bottom:5px;}
+        .panel-info p{font-size:0.9rem;color:#555;margin-bottom:5px;}
+        .panel-info .author{font-weight:bold;color:#3498db;}
+        .instruction-blocks{display:flex;flex-direction:column;gap:15px;}
+        .instruction-block{background:#e8f4fd;border-radius:10px;padding:15px;border-left:5px solid #3498db;box-shadow:0 4px 10px rgba(52, 152, 219, 0.2);transition:transform 0.3s;}
+        .instruction-block:hover{transform:translateY(-2px);}
+        .instruction-block h3{font-size:1.3rem;color:#3498db;margin-bottom:8px;}
+        .instruction-block p{font-size:1rem;color:#555;line-height:1.5;}
+        .protection-blocks{display:flex;flex-direction:column;gap:15px;}
+        .protection-block{background:#f8f9fa;border-radius:10px;padding:15px;border-left:5px solid #dc3545;box-shadow:0 4px 10px rgba(220, 53, 69, 0.2);transition:transform 0.3s;}
+        .protection-block:hover{transform:translateY(-2px);}
+        .protection-block h3{font-size:1.3rem;color:#dc3545;margin-bottom:8px;}
+        .protection-block p{font-size:1rem;line-height:1.5;}
     </style>
 </head>
 <body>
@@ -47,6 +67,7 @@
         <div class="sidebar">
             <img src="../data/img/logo.png" alt="Logo">
             <h2>Мой контент</h2>
+            <button class="access-btn" onclick="window.open('https://t.me/bratiskas_bot', '_blank')">Получить доступ к контенту</button>
             <div class="menu">
                 <ul>
                     <li><button type="button" onclick="showHome()" style="color:#ecf0f1;text-align:left;width:100%;padding:10px;">Главная</button></li>
@@ -56,30 +77,29 @@
                 <ul>
                     <li><button type="button" onclick="toggleSubmenu('lessons')">Уроки</button>
                         <ul class="submenu" id="lessons">
-                            <li><button type="button" onclick="openModal('stupid-as-teapot')">Тупой как чайник</button></li>
-                            <li><button type="button" onclick="openModal('first-steps')">Первые шаги</button></li>
+                    <li><button type="button" onclick="showContent('stupid-as-teapot')">Тупой как чайник</button></li>
+                            <li><button type="button" onclick="showContent('first-steps')">Первые шаги</button></li>
                         </ul>
                     </li>
                     <li><button type="button" onclick="toggleSubmenu('play-together')">Играем вместе</button>
                         <ul class="submenu" id="play-together">
-                            <li><button type="button" onclick="openModal('first-emotions')">Первые эмоции</button></li>
-                            <li><button type="button" onclick="openModal('random-mods')">Я прохожу рандомные моды</button></li>
-                            <li><button type="button" onclick="openModal('community-mods')">Обзор модов от сообщества</button></li>
+                            <li><button type="button" onclick="showContent('first-emotions')">Первые эмоции</button></li>
+                            <li><button type="button" onclick="showContent('random-mods')">Я прохожу рандомные моды</button></li>
+                            <li><button type="button" onclick="showContent('community-mods')">Обзор модов от сообщества</button></li>
                         </ul>
                     </li>
                     <li><button type="button" onclick="toggleSubmenu('super-modding')">Супер модинг</button>
                         <ul class="submenu" id="super-modding">
-                            <li><button type="button" onclick="openModal('humor-mods')">Юмор моды</button></li>
-                            <li><button type="button" onclick="openModal('stupid-teapot')">Новичок в модинге</button></li>
-                            <li><button type="button" onclick="openModal('dream-brushes')">Кисти моей мечты</button></li>
+                            <li><button type="button" onclick="showContent('humor-mods')">Юмор моды</button></li>
+                            <li><button type="button" onclick="showContent('stupid-teapot')">Новичок в модинге</button></li>
+                            <li><button type="button" onclick="showContent('dream-brushes')">Кисти моей мечты</button></li>
                         </ul>
                     </li>
                     <li><button type="button" onclick="toggleSubmenu('help')">Помощь</button>
                         <ul class="submenu" id="help">
                             <li><button type="button" onclick="showContent('how-to-get-code')">1) Как получить код</button></li>
-                            <li><button type="button" onclick="showContent('code-duration')">2) Сколько будет работать код</button></li>
-                            <li><button type="button" onclick="showContent('free-code')">3) Можно ли получить код бесплатно</button></li>
-                            <li><button type="button" onclick="showContent('video-leak')">4) А если видео сольют</button></li>
+                            <li><button type="button" onclick="showContent('free-access')">2) Можно ли получить доступ бесплатно</button></li>
+                            <li><button type="button" onclick="showContent('video-leak')">3) А если видео сольют</button></li>
                         </ul>
                     </li>
                 </ul>
@@ -89,7 +109,7 @@
             <h1>Добро пожаловать в мой личный контент! 🌟</h1>
             <div class="intro-block">
                 <h2>Эксклюзивная коллекция видео! 🚀</h2>
-                <p>Здесь вы найдете уникальный контент, созданный специально для фанатов Hytale. От базовых уроков до продвинутых модов – все для вашего удовольствия! Видео доступны только по кодам доступа для обеспечения качества и эксклюзивности. 🎥✨</p>
+                <p>Здесь вы найдете уникальный контент, созданный специально для фанатов Hytale. От базовых уроков до продвинутых модов – все для вашего удовольствия! 🎥✨</p>
             </div>
             <div class="section-block">
                 <h3>📚 Уроки</h3>
@@ -107,96 +127,163 @@
                 <p>Подразделы: "Юмор моды" – забавные и абсурдные модификации, "Новичок в модинге" – основы создания модов, "Кисти моей мечты" – творческие проекты и вдохновение. 💥</p>
             </div>
             <div class="intro-block">
-                <h2>Как получить доступ? 🔒</h2>
-                <p>Каждый подраздел защищен уникальным кодом доступа для обеспечения эксклюзивности. Выберите категорию в меню слева, кликните на интересующий раздел, введите код и наслаждайтесь контентом! Коды предоставляются по запросу через наш Discord-сервер или по email. Для получения кода вам может потребоваться поддержать проект (boost) или пройти верификацию. Подробности смотрите в разделе "Помощь". Не забудьте поделиться своими впечатлениями и предложениями! 📩✨</p>
+                <h2>Наслаждайтесь контентом! 🎉</h2>
+                <p>Все видео доступны бесплатно для нашего сообщества. Выберите категорию в меню слева и наслаждайтесь уникальным контентом! Не забудьте поделиться своими впечатлениями и предложениями! 📩✨</p>
             </div>
             <div id="stupid-as-teapot" class="video-content">
                 <h2>Уроки - тупой как чайник</h2>
-                <iframe src="https://www.youtube.com/embed/example1" allowfullscreen></iframe>
+                <iframe src="https://rutube.ru/embed/example1" allowfullscreen></iframe>
             </div>
             <div id="first-steps" class="video-content">
                 <h2>Уроки - Первые шаги</h2>
-                <iframe src="https://www.youtube.com/embed/example2" allowfullscreen></iframe>
+                <iframe src="https://rutube.ru/embed/example2" allowfullscreen></iframe>
             </div>
             <div id="first-emotions" class="video-content">
                 <h2>Играем вместе - первые эмоции</h2>
-                <iframe src="https://www.youtube.com/embed/example3" allowfullscreen></iframe>
+                <div class="video-panels">
+                    <div class="video-panel">
+                        <iframe src="https://rutube.ru/embed/example3a" allowfullscreen></iframe>
+                        <div class="panel-info">
+                            <h3>Видео 1: Первые эмоции старта</h3>
+                            <p>Описание: Мои искренние реакции на начало одиночных сессий в Hytale.</p>
+                            <p class="author">Автор: HGO</p>
+                        </div>
+                    </div>
+                    <div class="video-panel">
+                        <iframe src="https://rutube.ru/embed/example3b" allowfullscreen></iframe>
+                        <div class="panel-info">
+                            <h3>Видео 2: Эмоции от открытий</h3>
+                            <p>Описание: Реакции на неожиданные находки и события в игре.</p>
+                            <p class="author">Автор: HGO</p>
+                        </div>
+                    </div>
+                    <div class="video-panel">
+                        <iframe src="https://rutube.ru/embed/example3c" allowfullscreen></iframe>
+                        <div class="panel-info">
+                            <h3>Видео 3: Финальные эмоции</h3>
+                            <p>Описание: Завершающие впечатления от одиночных приключений.</p>
+                            <p class="author">Автор: HGO</p>
+                        </div>
+                    </div>
+                </div>
             </div>
             <div id="random-mods" class="video-content">
                 <h2>Играем вместе - Я проходу рандомные моды</h2>
-                <iframe src="https://www.youtube.com/embed/example4" allowfullscreen></iframe>
+                <div class="video-panels">
+                    <div class="video-panel">
+                        <iframe src="https://rutube.ru/embed/example4a" allowfullscreen></iframe>
+                        <div class="panel-info">
+                            <h3>Видео 1: Рандомный мод 1</h3>
+                            <p>Описание: Прохождение случайного мода с хаосом и весельем.</p>
+                            <p class="author">Автор: HGO</p>
+                        </div>
+                    </div>
+                    <div class="video-panel">
+                        <iframe src="https://rutube.ru/embed/example4b" allowfullscreen></iframe>
+                        <div class="panel-info">
+                            <h3>Видео 2: Рандомный мод 2</h3>
+                            <p>Описание: Еще одно непредсказуемое приключение с модами.</p>
+                            <p class="author">Автор: HGO</p>
+                        </div>
+                    </div>
+                    <div class="video-panel">
+                        <iframe src="https://rutube.ru/embed/example4c" allowfullscreen></iframe>
+                        <div class="panel-info">
+                            <h3>Видео 3: Рандомный мод 3</h3>
+                            <p>Описание: Финальное прохождение рандомного мода.</p>
+                            <p class="author">Автор: HGO</p>
+                        </div>
+                    </div>
+                </div>
             </div>
             <div id="community-mods" class="video-content">
                 <h2>Играем вместе - Обзор модов от сообщества</h2>
-                <iframe src="https://www.youtube.com/embed/example5" allowfullscreen></iframe>
+                <div class="video-panels">
+                    <div class="video-panel">
+                        <iframe src="https://rutube.ru/embed/example5a" allowfullscreen></iframe>
+                        <div class="panel-info">
+                            <h3>Видео 1: Обзор модов 1</h3>
+                            <p>Описание: Анализ лучших творений фанатов глазами одиночки.</p>
+                            <p class="author">Автор: HGO</p>
+                        </div>
+                    </div>
+                    <div class="video-panel">
+                        <iframe src="https://rutube.ru/embed/example5b" allowfullscreen></iframe>
+                        <div class="panel-info">
+                            <h3>Видео 2: Обзор модов 2</h3>
+                            <p>Описание: Продолжение обзоров модов от сообщества.</p>
+                            <p class="author">Автор: HGO</p>
+                        </div>
+                    </div>
+                    <div class="video-panel">
+                        <iframe src="https://rutube.ru/embed/example5c" allowfullscreen></iframe>
+                        <div class="panel-info">
+                            <h3>Видео 3: Обзор модов 3</h3>
+                            <p>Описание: Завершающий анализ модов от фанатов.</p>
+                            <p class="author">Автор: HGO</p>
+                        </div>
+                    </div>
+                </div>
             </div>
             <div id="humor-mods" class="video-content">
                 <h2>Супер модинг - юмор моды</h2>
-                <iframe src="https://www.youtube.com/embed/example6" allowfullscreen></iframe>
+                <iframe src="https://rutube.ru/embed/example6" allowfullscreen></iframe>
             </div>
             <div id="stupid-teapot" class="video-content">
                 <h2>Супер модинг - тупой как чайник</h2>
-                <iframe src="https://www.youtube.com/embed/example7" allowfullscreen></iframe>
+                <iframe src="https://rutube.ru/embed/example7" allowfullscreen></iframe>
             </div>
             <div id="dream-brushes" class="video-content">
                 <h2>Супер модинг - Кисти моей мечты</h2>
-                <iframe src="https://www.youtube.com/embed/example8" allowfullscreen></iframe>
+                <iframe src="https://rutube.ru/embed/example8" allowfullscreen></iframe>
             </div>
             <div id="how-to-get-code" class="video-content">
-                <div class="section-block">
-                    <h3>1) Как получить код</h3>
-                    <p>Система получения кодов доступа пока в разработке. В будущем она будет работать через бусти проекта или верификацию по email. Подробности будут объявлены позже. Следите за обновлениями!</p>
+                <h2>Как получить доступ к контенту</h2>
+                <div class="instruction-blocks">
+                    <div class="instruction-block">
+                        <h3>Инструкция по получению доступа</h3>
+                        <p>1. Нажмите кнопку "Получить доступ к контенту" в меню слева.<br>2. Перейдите в чат с ботом @bratiskas_bot в Telegram.<br>3. Следуйте инструкциям бота для получения доступа к контенту.</p>
+                    </div>
                 </div>
             </div>
-            <div id="code-duration" class="video-content">
+            <div id="free-access" class="video-content">
+                <h3 style="background:linear-gradient(45deg, #1e1e1e, #2c3e50);color:#fff;padding:15px 20px;border-radius:15px;margin-bottom:20px;text-align:center;font-size:1.8rem;text-shadow:2px 2px 4px rgba(0,0,0,0.5);box-shadow:0 4px 15px rgba(0,0,0,0.3);">Можно ли получить доступ бесплатно</h3>
                 <div class="section-block">
-                    <h3>Сколько будет работать код</h3>
-                    <p>Информация пока недоступна.</p>
+                    <p style="font-size:1.2rem;color:#e74c3c;font-weight:bold;text-align:center;">Пока что получить доступ бесплатно нельзя.</p>
+                    <p style="font-size:1.1rem;color:#3498db;text-align:center;margin-top:10px;">Но мы подумаем, как это реализовать для некоторых наших подписчиков.</p>
                 </div>
             </div>
-            <div id="free-code" class="video-content">
-                <div class="section-block">
-                    <h3>Можно ли получить код бесплатно</h3>
-                    <p>Информация пока недоступна.</p>
-                </div>
-            </div>
+
             <div id="video-leak" class="video-content">
-                <div class="section-block">
-                    <h3>А если видео сольют</h3>
-                    <p>Информация пока недоступна.</p>
+                <h2>А если видео сольют</h2>
+                <div class="protection-blocks">
+                    <div class="protection-block">
+                        <h3>🔒 Защита контента</h3>
+                        <p style="color: #e74c3c;">Наши видео защищены специальными водяными знаками и уникальными идентификаторами.</p>
+                    </div>
+                    <div class="protection-block">
+                        <h3>🚫 Автоматическое обнаружение</h3>
+                        <p style="color: #f39c12;">Любое копирование или распространение нашего контента на других ресурсах будет автоматически обнаружено и заблокировано.</p>
+                    </div>
+                    <div class="protection-block">
+                        <h3>⚡ Передовые технологии</h3>
+                        <p style="color: #27ae60;">Мы используем передовые технологии защиты авторских прав, которые предотвращают несанкционированное использование материалов.</p>
+                    </div>
+                    <div class="protection-block">
+                        <h3>📢 Сообщите нам</h3>
+                        <p style="color: #3498db;">Если вы заметите наш контент где-то еще, пожалуйста, сообщите нам – мы предпримем все необходимые меры для его удаления и защиты наших прав.</p>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
 
-    <div id="password-modal" class="modal">
-        <div class="modal-content">
-            <span class="close" onclick="closeModal()">&times;</span>
-            <h2>Введите код доступа</h2>
-            <input type="password" id="password-input" placeholder="Код доступа">
-            <div id="error-message" class="error-message">Код не верен</div>
-            <button onclick="checkPassword()">Войти</button>
-        </div>
-    </div>
+
 
     <script>
-        let currentContent = '';
-
         function toggleSubmenu(id) {
             const submenu = document.getElementById(id);
             submenu.style.display = submenu.style.display === 'block' ? 'none' : 'block';
-        }
-
-        function openModal(contentId) {
-            currentContent = contentId;
-            document.getElementById('password-modal').style.display = 'block';
-            document.getElementById('error-message').style.display = 'none';
-            document.getElementById('password-input').classList.remove('shake');
-            document.getElementById('password-input').value = '';
-        }
-
-        function closeModal() {
-            document.getElementById('password-modal').style.display = 'none';
         }
 
         function showContent(contentId) {
@@ -207,44 +294,6 @@
         function showHome() {
             document.querySelectorAll('.content > *').forEach(el => el.style.display = 'block');
             document.querySelectorAll('.video-content').forEach(el => el.style.display = 'none');
-        }
-
-        function hash(str) {
-            return str.replace(/-/g, '');
-        }
-
-        function checkPassword() {
-            const password = document.getElementById('password-input').value;
-            const passwords = {
-                'stupid-as-teapot': '728491365',
-                'first-steps': '159263487',
-                'first-emotions': '624837951',
-                'random-mods': '473918205',
-                'community-mods': '836192547',
-                'humor-mods': '295648173',
-                'stupid-teapot': '841926357',
-                'dream-brushes': '517384692',
-                'how-to-get-code': '763429185',
-                'code-duration': '946571238',
-                'free-code': '382695147',
-                'video-leak': '514827369'
-            };
-            const input = document.getElementById('password-input');
-            const errorMsg = document.getElementById('error-message');
-            if (hash(password) === passwords[currentContent]) {
-                document.querySelectorAll('.video-content').forEach(el => el.style.display = 'none');
-                document.getElementById(currentContent).style.display = 'block';
-                closeModal();
-                errorMsg.style.display = 'none';
-                input.classList.remove('shake');
-                input.value = '';
-            } else {
-                errorMsg.style.display = 'block';
-                input.classList.add('shake');
-                setTimeout(() => {
-                    input.classList.remove('shake');
-                }, 500);
-            }
         }
     </script>
 </body>
