@@ -5,6 +5,8 @@ const releaseHoursElement = document.getElementById('release-hours');
 const releaseMinutesElement = document.getElementById('release-minutes');
 const releaseSecondsElement = document.getElementById('release-seconds');
 
+let isInitial = true;
+
 function updateReleaseTimer() {
     const now = new Date();
     const timeDifference = releaseDate - now;
@@ -20,11 +22,13 @@ function updateReleaseTimer() {
         const oldMinutes = parseInt(releaseMinutesElement.textContent) || 0;
         const oldSeconds = parseInt(releaseSecondsElement.textContent) || 0;
 
-        // Добавить анимацию только к изменившимся
-        if (days !== oldDays) releaseDaysElement.classList.add('flip');
-        if (hours !== oldHours) releaseHoursElement.classList.add('flip');
-        if (minutes !== oldMinutes) releaseMinutesElement.classList.add('flip');
-        if (seconds !== oldSeconds) releaseSecondsElement.classList.add('flip');
+        // Добавить анимацию только к изменившимся, если не initial
+        if (!isInitial) {
+            if (days !== oldDays) releaseDaysElement.classList.add('flip');
+            if (hours !== oldHours) releaseHoursElement.classList.add('flip');
+            if (minutes !== oldMinutes) releaseMinutesElement.classList.add('flip');
+            if (seconds !== oldSeconds) releaseSecondsElement.classList.add('flip');
+        }
 
         // Обновить текст сразу
         releaseDaysElement.textContent = days;
@@ -33,12 +37,16 @@ function updateReleaseTimer() {
         releaseSecondsElement.textContent = seconds;
 
         // Убрать класс через 500ms
-        setTimeout(() => {
-            releaseDaysElement.classList.remove('flip');
-            releaseHoursElement.classList.remove('flip');
-            releaseMinutesElement.classList.remove('flip');
-            releaseSecondsElement.classList.remove('flip');
-        }, 500);
+        if (!isInitial) {
+            setTimeout(() => {
+                releaseDaysElement.classList.remove('flip');
+                releaseHoursElement.classList.remove('flip');
+                releaseMinutesElement.classList.remove('flip');
+                releaseSecondsElement.classList.remove('flip');
+            }, 500);
+        }
+
+        isInitial = false;
     } else {
         releaseDaysElement.textContent = '0';
         releaseHoursElement.textContent = '0';
