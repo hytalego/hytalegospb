@@ -154,9 +154,14 @@
                 <li><a href="#about">Об игре</a></li>
                 <li><a href="#screenshots">Скриншоты</a></li>
                 <li><a href="#videos">Видео</a></li>
-                <li><a href="mods/index.html">Моды</a></li>
-                <li><a href="mycontent/index.html">Мой контент</a></li>
-                <li><a href="#download">Скачать игру</a></li>
+                <li class="dropdown">
+                    <a href="#">Дополнительно</a>
+                    <ul class="dropdown-menu">
+                        <li><a href="mods/index.html">Моды</a></li>
+                        <li><a href="mycontent/index.html">Мой контент</a></li>
+                    </ul>
+                </li>
+                <li class="download-menu"><a href="#download">Скачать игру</a></li>
 
             </ul>
         </nav>
@@ -167,6 +172,14 @@
     </header>
 
     <section id="home" class="hero">
+        <div class="contest-panel">
+            <div class="contest-content">
+                <div class="contest-text">
+                Конкурс - <span class="no-text">Пока нету</span>
+                </div>
+                <button id="contest-btn" class="contest-btn">Открыть</button>
+            </div>
+        </div>
         <div class="content">
             <h1>Добро пожаловать в Hytale!</h1>
             <p>Погрузитесь в эпический фэнтезийный мир и станьте героями своего времени. Исследуйте подземелья, стройте крепости и сражайтесь с друзьями в уникальном мире блоков!</p>
@@ -401,7 +414,7 @@
                         <div class="card-icon large">🚀</div>
                         <h3>Лаунчер Hytale</h3>
                         <p>Рекомендуемый способ. Автоматические обновления и простая установка.</p>
-                        <a href="download/download.html" class="download-btn primary">Скачать лаунчер</a>
+                        <a href="download/download.html" class="download-btn primary" id="download-launcher-btn">Скачать лаунчер</a>
                     </div>
                 </div>
                 <div id="direct" class="tab-pane">
@@ -437,6 +450,14 @@
 
 
 
+
+    <!-- Contest Modal -->
+    <div id="contest-modal" class="contest-modal">
+        <div class="contest-modal-content">
+            <span class="contest-close">&times;</span>
+            <!-- Пустое модальное окно -->
+        </div>
+    </div>
 
     <!-- Warning Modal -->
     <div id="warning-modal" class="warning-modal">
