@@ -701,6 +701,57 @@ footer{
     50%{transform:scale(1.1); color:#00d4ff;}
 }
 
+/* ────────────────────────── GAME ───────────────────────────── */
+.game-ball {
+    position: absolute;
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    background-color: rgba(255, 255, 255, 0.8);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 24px;
+    font-weight: bold;
+    color: #000;
+    cursor: pointer;
+    transition: transform 0.2s;
+    z-index: 1000;
+    box-shadow: 0 0 10px rgba(0,0,0,0.5);
+}
+.game-ball:hover {
+    transform: scale(1.1);
+}
+.game-popup {
+    display: none;
+    position: fixed;
+    z-index: 2000;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0,0,0,0.9);
+}
+.game-popup-close {
+    position: absolute;
+    top: 15px;
+    right: 35px;
+    color: #f1f1f1;
+    font-size: 40px;
+    font-weight: bold;
+    cursor: pointer;
+}
+.game-popup-close:hover {
+    color: #bbb;
+}
+.game-popup-img {
+    margin: auto;
+    display: block;
+    max-width: 90%;
+    max-height: 90%;
+    margin-top: 5%;
+}
+
 /* ────────────────────────── RESPONSIVE DESIGN ────────────────── */
 @media (max-width: 768px) {
     .header {
