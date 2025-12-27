@@ -138,7 +138,7 @@ document.addEventListener('DOMContentLoaded', () => {
     downloadLauncherBtn.addEventListener('click', (e) => {
         e.preventDefault();
         // Файл существует, перенаправляем на страницу скачивания
-        window.location.href = 'download.html';
+        window.location.href = 'download/download.html';
     });
 
     document.getElementById('direct-form').addEventListener('submit', (e) => {
