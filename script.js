@@ -3,6 +3,65 @@ const releaseDate = new Date(2026, 0, 13, 18, 0, 0); // January 13, 2026, 18:00:
 
 document.addEventListener('DOMContentLoaded', () => {
 
+    // Таймер: до выхода игры
+    const releaseDaysElement = document.getElementById('release-days');
+    const releaseHoursElement = document.getElementById('release-hours');
+    const releaseMinutesElement = document.getElementById('release-minutes');
+    const releaseSecondsElement = document.getElementById('release-seconds');
+
+    let isInitial = true;
+
+    function updateReleaseTimer() {
+        const now = new Date();
+        const timeDifference = releaseDate - now;
+        if (timeDifference > 0) {
+            const days = Math.floor(timeDifference / (1000 * 60 * 60 * 24));
+            const hours = Math.floor((timeDifference % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            const minutes = Math.floor((timeDifference % (1000 * 60 * 60)) / (1000 * 60));
+            const seconds = Math.floor((timeDifference % (1000 * 60)) / 1000);
+
+            // Проверить, какие числа изменились
+            const oldDays = parseInt(releaseDaysElement.textContent) || 0;
+            const oldHours = parseInt(releaseHoursElement.textContent) || 0;
+            const oldMinutes = parseInt(releaseMinutesElement.textContent) || 0;
+            const oldSeconds = parseInt(releaseSecondsElement.textContent) || 0;
+
+            // Добавить анимацию к изменившимся
+            if (days !== oldDays) releaseDaysElement.classList.add('flip');
+            if (hours !== oldHours) releaseHoursElement.classList.add('flip');
+            if (minutes !== oldMinutes) releaseMinutesElement.classList.add('flip');
+            if (seconds !== oldSeconds) releaseSecondsElement.classList.add('flip');
+
+            // Обновить текст в середине анимации (250ms)
+            setTimeout(() => {
+                releaseDaysElement.textContent = days.toString().padStart(2, '0');
+                releaseHoursElement.textContent = hours.toString().padStart(2, '0');
+                releaseMinutesElement.textContent = minutes.toString().padStart(2, '0');
+                releaseSecondsElement.textContent = seconds.toString().padStart(2, '0');
+            }, 250);
+
+            // Убрать класс через 500ms
+            setTimeout(() => {
+                releaseDaysElement.classList.remove('flip');
+                releaseHoursElement.classList.remove('flip');
+                releaseMinutesElement.classList.remove('flip');
+                releaseSecondsElement.classList.remove('flip');
+            }, 500);
+
+            isInitial = false;
+        } else {
+            releaseDaysElement.textContent = '00';
+            releaseHoursElement.textContent = '00';
+            releaseMinutesElement.textContent = '00';
+            releaseSecondsElement.textContent = '00';
+            document.getElementById('release-timer').innerHTML = '<span class="final-msg">Игра вышла!</span>';
+            document.querySelector('.final-msg').style.animation = 'celebrate 2s infinite';
+        }
+    }
+
+    setInterval(updateReleaseTimer, 1000);
+    updateReleaseTimer(); // Initial call
+
     // Обработка вкладок
     const tabButtons = document.querySelectorAll('.tab-btn');
     const tabPanes = document.querySelectorAll('.tab-pane');
