@@ -253,4 +253,33 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
 
+
+    let glitchChance = 0.6;
+    let currentTimeoutId;
+
+    function triggerRandomGlitch() {
+        if (Math.random() < glitchChance) {
+            const randomGlitch = glitches[Math.floor(Math.random() * glitches.length)];
+            randomGlitch();
+        }
+        const delay = glitchChance === 0.9 ? 1 + Math.random() * 999 : 1000 + Math.random() * 19000;
+        currentTimeoutId = setTimeout(triggerRandomGlitch, delay);
+    }
+    triggerRandomGlitch(); // start
+
+    // Периодически увеличивать шанс глюков
+    setInterval(() => {
+        glitchChance = 0.9; // чаще
+        document.querySelector('.header').style.borderBottomColor = 'red';
+        clearTimeout(currentTimeoutId);
+        triggerRandomGlitch(); // сразу начать
+        setTimeout(() => {
+            glitchChance = 0.6;
+            document.querySelector('.header').style.borderBottomColor = '#3498db';
+            clearTimeout(currentTimeoutId);
+            triggerRandomGlitch(); // сразу переключить
+        }, 10000 + Math.random() * 20000); // 10000-30000ms
+    }, 15000 + Math.random() * 10000); // 15000-25000ms
+
+
 });
