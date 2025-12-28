@@ -9,6 +9,11 @@ document.addEventListener('DOMContentLoaded', () => {
     const releaseMinutesElement = document.getElementById('release-minutes');
     const releaseSecondsElement = document.getElementById('release-seconds');
 
+    if (!releaseDaysElement || !releaseHoursElement || !releaseMinutesElement || !releaseSecondsElement) {
+        console.error('Timer elements not found');
+        return;
+    }
+
     let isInitial = true;
 
     function updateReleaseTimer() {
@@ -153,22 +158,26 @@ document.addEventListener('DOMContentLoaded', () => {
     const modalImg = document.getElementById('modal-img');
     const closeBtn = document.getElementsByClassName('close')[0];
 
-    document.querySelectorAll('.gallery-img').forEach(img => {
-        img.addEventListener('click', () => {
-            modal.style.display = 'block';
-            modalImg.src = img.dataset.src;
+    if (modal && modalImg) {
+        document.querySelectorAll('.gallery-img').forEach(img => {
+            img.addEventListener('click', () => {
+                modal.style.display = 'block';
+                modalImg.src = img.dataset.src;
+            });
         });
-    });
 
-    closeBtn.addEventListener('click', () => {
-        modal.style.display = 'none';
-    });
-
-    modal.addEventListener('click', (e) => {
-        if (e.target === modal) {
-            modal.style.display = 'none';
+        if (closeBtn) {
+            closeBtn.addEventListener('click', () => {
+                modal.style.display = 'none';
+            });
         }
-    });
+
+        modal.addEventListener('click', (e) => {
+            if (e.target === modal) {
+                modal.style.display = 'none';
+            }
+        });
+    }
 
     // Кнопка "Узнать больше" - прокрутка к описанию
     document.querySelector('.cta').addEventListener('click', () => {
@@ -192,64 +201,74 @@ document.addEventListener('DOMContentLoaded', () => {
     const warningModal = document.getElementById('warning-modal');
     const warningClose = document.getElementsByClassName('warning-close')[0];
 
-    // Show modal immediately
-    warningModal.style.display = 'block';
+    if (warningModal) {
+        // Show modal immediately
+        warningModal.style.display = 'block';
 
-    // Close modal when clicking close button
-    warningClose.addEventListener('click', () => {
-        warningModal.style.display = 'none';
-    });
-
-    // Close modal when clicking outside
-    warningModal.addEventListener('click', (e) => {
-        if (e.target === warningModal) {
-            warningModal.style.display = 'none';
+        // Close modal when clicking close button
+        if (warningClose) {
+            warningClose.addEventListener('click', () => {
+                warningModal.style.display = 'none';
+            });
         }
-    });
+
+        // Close modal when clicking outside
+        warningModal.addEventListener('click', (e) => {
+            if (e.target === warningModal) {
+                warningModal.style.display = 'none';
+            }
+        });
+    }
 
     // Contest Modal
-    const contestModal = document.getElementById('contest-modal');
-    const contestBtn = document.getElementById('contest-btn');
-    const contestClose = document.getElementsByClassName('contest-close')[0];
+    try {
+        const contestModal = document.getElementById('contest-modal');
+        const contestBtn = document.getElementById('contest-btn');
+        const contestClose = document.getElementsByClassName('contest-close')[0];
 
-    if (contestBtn) {
-        // Open modal when clicking contest button
-        contestBtn.addEventListener('click', (e) => {
-            e.preventDefault();
-            if (contestModal) {
-                contestModal.style.removeProperty('visibility');
-                contestModal.style.removeProperty('opacity');
-                contestModal.classList.add('show');
-            }
-        });
-    }
-
-    if (contestClose) {
-        // Close modal when clicking close button
-        contestClose.addEventListener('click', () => {
-            closeContestModal();
-        });
-    }
-
-    if (contestModal) {
-        // Close modal when clicking outside
-        contestModal.addEventListener('click', (e) => {
-            if (e.target === contestModal) {
-                closeContestModal();
-            }
-        });
-    }
-
-    function closeContestModal() {
-        if (contestModal) {
-            contestModal.classList.add('hide');
-            setTimeout(() => {
-                contestModal.classList.remove('show');
-                contestModal.classList.remove('hide');
-                contestModal.style.opacity = '0';
-                contestModal.style.visibility = 'hidden';
-            }, 500); // Match animation duration
+        if (contestBtn && contestBtn.addEventListener) {
+            // Open modal when clicking contest button
+            contestBtn.addEventListener('click', (e) => {
+                e.preventDefault();
+                const modal = document.getElementById('contest-modal');
+                if (modal && modal.style) {
+                    modal.style.removeProperty('visibility');
+                    modal.style.removeProperty('opacity');
+                    modal.classList.add('show');
+                }
+            });
         }
+
+        if (contestClose && contestClose.addEventListener) {
+            // Close modal when clicking close button
+            contestClose.addEventListener('click', () => {
+                closeContestModal();
+            });
+        }
+
+        if (contestModal && contestModal.addEventListener) {
+            // Close modal when clicking outside
+            contestModal.addEventListener('click', (e) => {
+                if (e.target === contestModal) {
+                    closeContestModal();
+                }
+            });
+        }
+
+        function closeContestModal() {
+            const modal = document.getElementById('contest-modal');
+            if (modal && modal.classList && modal.style) {
+                modal.classList.add('hide');
+                setTimeout(() => {
+                    modal.classList.remove('show');
+                    modal.classList.remove('hide');
+                    modal.style.opacity = '0';
+                    modal.style.visibility = 'hidden';
+                }, 500); // Match animation duration
+            }
+        }
+    } catch (error) {
+        console.error('Error in contest modal:', error);
     }
 
 

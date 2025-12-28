@@ -14,8 +14,10 @@
         .access-btn:hover{transform:scale(1.05);}
         .menu ul{list-style:none;}
         .menu li{margin-bottom:10px;}
-        .menu button{background:none;border:none;color:#ecf0f1;text-align:left;width:100%;padding:10px;cursor:pointer;}
+        .menu button{background:#4a4a4a;border:none;color:#ecf0f1;text-align:left;width:100%;padding:10px;cursor:pointer;border-radius:5px;margin-bottom:5px;}
         .menu button:hover{background:#34495e;}
+        .menu button.help{background:#6c5ce7;}
+        .menu button.help:hover{background:#5a4fcf;}
         .submenu{display:none;padding-left:20px;}
         .submenu li{margin-bottom:5px;}
         .submenu button{font-size:0.9em;}
@@ -75,17 +77,18 @@
             </div>
             <div class="menu">
                 <ul>
-                    <li><button type="button" onclick="toggleSubmenu('lessons')">Уроки</button>
-                        <ul class="submenu" id="lessons">
-                    <li><button type="button" onclick="showContent('stupid-as-teapot')">Тупой как чайник</button></li>
-                            <li><button type="button" onclick="showContent('first-steps')">Первые шаги</button></li>
-                        </ul>
-                    </li>
+                    <li><button type="button" onclick="showContent('preparation')">Подготовка</button></li>
                     <li><button type="button" onclick="toggleSubmenu('letsplay')">Летсплей</button>
                         <ul class="submenu" id="letsplay">
                             <li><button type="button" onclick="showContent('first-emotions')">Первые эмоции</button></li>
                             <li><button type="button" onclick="showContent('random-mods')">Я прохожу рандомные моды</button></li>
                             <li><button type="button" onclick="showContent('community-mods')">Обзор модов от сообщества</button></li>
+                        </ul>
+                    </li>
+                    <li><button type="button" onclick="toggleSubmenu('lessons')">Уроки</button>
+                        <ul class="submenu" id="lessons">
+                            <li><button type="button" onclick="showContent('stupid-as-teapot')">Тупой как чайник</button></li>
+                            <li><button type="button" onclick="showContent('first-steps')">Первые шаги</button></li>
                         </ul>
                     </li>
                     <li><button type="button" onclick="toggleSubmenu('super-modding')">Супер модинг</button>
@@ -95,7 +98,7 @@
                             <li><button type="button" onclick="showContent('dream-brushes')">Кисти моей мечты</button></li>
                         </ul>
                     </li>
-                    <li><button type="button" onclick="toggleSubmenu('help')">Помощь</button>
+                    <li><button type="button" class="help" onclick="toggleSubmenu('help')">Помощь</button>
                         <ul class="submenu" id="help">
                             <li><button type="button" onclick="showContent('how-to-get-code')">1) Как получить код</button></li>
                             <li><button type="button" onclick="showContent('free-access')">2) Можно ли получить доступ бесплатно</button></li>
@@ -110,6 +113,10 @@
             <div class="intro-block">
                 <h2>Эксклюзивная коллекция видео! 🚀</h2>
                 <p>Здесь вы найдете уникальный контент, созданный специально для фанатов Hytale. От базовых уроков до продвинутых модов – все для вашего удовольствия! 🎥✨</p>
+            </div>
+            <div class="section-block">
+                <h3>🔧 Подготовка</h3>
+                <p>Подготовьтесь к игре! Здесь вы найдете три видео: "Предвкушение и надежда" – ожидание перед стартом, "Первый запуск и настройка" – установка и настройка, "Первый взгляд" – первое впечатление от игры. 🚀</p>
             </div>
             <div class="section-block">
                 <h3>📚 Уроки</h3>
@@ -129,6 +136,35 @@
             <div class="intro-block">
                 <h2>Наслаждайтесь контентом! 🎉</h2>
                 <p>Все видео доступны бесплатно для нашего сообщества. Выберите категорию в меню слева и наслаждайтесь уникальным контентом! Не забудьте поделиться своими впечатлениями и предложениями! 📩✨</p>
+            </div>
+            <div id="preparation" class="video-content">
+                <h2>Подготовка</h2>
+                <div class="video-panels">
+                    <div class="video-panel">
+                        <iframe src="https://rutube.ru/embed/example-anticipation" allowfullscreen></iframe>
+                        <div class="panel-info">
+                            <h3>Предвкушение и надежда</h3>
+                            <p>Описание: Мои ожидания перед началом игры.</p>
+                            <p class="author">Автор: HGO</p>
+                        </div>
+                    </div>
+                    <div class="video-panel">
+                        <iframe src="https://rutube.ru/embed/example-launch" allowfullscreen></iframe>
+                        <div class="panel-info">
+                            <h3>Первый запуск и настройка</h3>
+                            <p>Описание: Установка и первые настройки.</p>
+                            <p class="author">Автор: HGO</p>
+                        </div>
+                    </div>
+                    <div class="video-panel">
+                        <iframe src="https://rutube.ru/embed/example-look" allowfullscreen></iframe>
+                        <div class="panel-info">
+                            <h3>Первый взгляд</h3>
+                            <p>Описание: Первое впечатление от интерфейса и мира.</p>
+                            <p class="author">Автор: HGO</p>
+                        </div>
+                    </div>
+                </div>
             </div>
             <div id="stupid-as-teapot" class="video-content">
                 <h2>Уроки - тупой как чайник</h2>

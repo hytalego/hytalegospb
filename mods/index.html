@@ -2,255 +2,892 @@
 <html lang="ru">
 <head>
     <meta charset="UTF-8">
-    <title>Моды Hytale - HytaleClubRu</title>
-    <link rel="stylesheet" href="menu.css">
+    <title>Hytale Mods - Современная платформа моддинга</title>
     <style>
-        *{margin:0;padding:0;box-sizing:border-box;}
-        html,body{height:100%;font-family:'Roboto',sans-serif;color:#e0e0e0;}
-        a{text-decoration:none;color:inherit;}
-        ul{list-style:none;}
-        button{cursor:pointer;border:none;font-family:inherit;}
-
-        body{background: url('img/fon.png') center/cover no-repeat fixed; background-color:#212121;}
-
-        .sidebar{position:static;width:300px;background:#1a1a1a;
-                box-shadow:2px 0 10px rgba(0,0,0,0.5);padding:20px;margin-right:20px;}
-        .sidebar h2{color:#3498db;margin-bottom:20px;}
-        .sidebar ul li{margin-bottom:10px;}
-        .sidebar button{background:none;color:#e0e0e0;border:1px solid #555;padding:10px;width:100%;
-                      text-align:left;cursor:pointer;border-radius:5px;}
-        .sidebar button:hover{background:#333;}
-        .sidebar button.active{background:#3498db;color:white;}
-
-        .mods-header{
-            text-align:center;padding:4rem 2rem;background:rgba(30,60,114,0.8);backdrop-filter:blur(10px);
-            color:#fff;position:relative;overflow:hidden;border-radius:20px;margin:2rem auto;max-width:800px;
+        :root {
+            --primary: #555;
+            --secondary: #333;
+            --accent: #777;
+            --dark: #1a1a1a;
+            --darker: #111;
+            --light: #ddd;
+            --success: #444;
+            --warning: #666;
+            --danger: #888;
+            --shadow: 0 10px 30px rgba(0,0,0,0.5);
+            --border-radius: 10px;
+            --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
         }
-        .mods-header h1{font-size:3rem;margin-bottom:1rem;text-shadow:3px 3px 6px rgba(0,0,0,0.7);
-                        animation:fadeInUp 1s ease;}
-        .mods-header p{font-size:1.3rem;color:#e0e0e0;text-shadow:1px 1px 2px rgba(0,0,0,0.5);
-                      animation:fadeInUp 1.5s ease;}
 
-        @keyframes fadeInUp{from{opacity:0;transform:translateY(30px);}to{opacity:1;transform:translateY(0);}}
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
 
-        .mods-container{padding:3rem 2rem;max-width:1000px;margin:0 auto;}
-        .mods-section{display:flex;align-items:flex-start;}
-        .mods-main{flex:1;background:rgba(0,0,0,0.5);border-radius:15px;padding:2rem;}
-        .view-controls{display:flex;align-items:center;margin-bottom:2rem;}
-        .view-controls h3{color:#3498db;margin-right:1rem;font-size:1.5rem;}
-        .view-controls button{background:#333;color:#e0e0e0;border:2px solid #555;border-radius:10px;
-                              padding:0.5rem;width:60px;height:60px;margin:0 0.5rem;cursor:pointer;font-size:1.5rem;}
-        .view-controls button:hover{background:#555;border-color:#3498db;}
-        .view-controls button.active{background:#3498db;border-color:#2980b9;}
-        .mods-grid{background:rgba(0,0,0,0.5);border-radius:15px;padding:2rem;margin:0 auto;max-width:1200px;}
-        .mods-grid.list-view{display:block;}
-        .mods-grid.grid-view{display:grid;grid-template-columns:repeat(3, 1fr);gap:1.5rem;}
-        .mod-card{background:#333;border-radius:10px;padding:1.5rem;text-align:center;width:100%;max-width:250px;margin:0 auto;
-                  box-shadow:0 4px 15px rgba(0,0,0,0.5);transition:transform 0.3s,box-shadow 0.3s;cursor:pointer;}
-        .mods-grid.list-view .mod-card{display:flex;margin-bottom:1rem;width:100%;max-width:none;}
-        .mod-placeholder{font-size:2rem;width:60px;height:60px;display:flex;align-items:center;justify-content:center;margin-right:1rem;border:2px dashed #555;border-radius:10px;}
-        .mods-grid.grid-view .mod-placeholder{display:none;}
-        .mods-grid.list-view .mod-card .content{display:flex;flex-direction:column;}
-        .mods-grid.list-view .mod-card h3{margin-bottom:0.5rem;text-align:left;}
-        .mods-grid.list-view .mod-card p{margin:0;text-align:left;}
-        .mod-card:hover{transform:translateY(-5px);box-shadow:0 8px 25px rgba(52,152,219,0.3);}
-        .mod-icon{width:60px;height:60px;border-radius:10px;margin-bottom:1rem;object-fit:cover;}
-        .mod-card h3{color:#3498db;margin-bottom:0.5rem;font-size:1.3rem;}
-        .mod-card p{color:#e0e0e0;font-size:0.8rem;line-height:1.5;}
+        html {
+            scroll-behavior: smooth;
+        }
 
-        .modal{display:none;position:fixed;z-index:2000;left:0;top:0;width:100%;height:100%;
-               background:rgba(0,0,0,0.8);backdrop-filter:blur(5px);animation:modalFadeIn 0.3s ease;}
-        .modal-content{background:#1a1a1a;margin:10% auto;padding:0;border-radius:15px;
-                      width:80%;max-width:600px;position:relative;box-shadow:0 10px 30px rgba(0,0,0,0.5);
-                      animation:modalScaleIn 0.3s ease;}
-        .modal-header{background:linear-gradient(45deg,#3498db,#2980b9);padding:1.5rem;border-radius:15px 15px 0 0;text-align:center;}
-        .modal-header h2{color:white;margin:0;font-size:2rem;}
-        .close-modal{position:absolute;top:10px;right:20px;font-size:2rem;cursor:pointer;color:#e0e0e0;z-index:1;}
-        .modal-body{padding:2rem;}
-        .modal-description{background:#000;border:2px solid #555;border-top:4px solid #fff;padding:1rem;border-radius:10px;margin-bottom:1rem;color:#e0e0e0;}
-        .modal-screenshots{display:flex;justify-content:space-around;margin:1rem 0;}
-        .screenshot{font-size:3rem;}
-        .modal-author{text-align:center;margin:1rem 0;color:#3498db;font-weight:bold;}
-        .modal-download{background:linear-gradient(45deg,#3498db,#2980b9);color:white;padding:1rem 2rem;
-                       border-radius:10px;display:block;margin:2rem auto;border:none;
-                       transition:transform 0.3s;}
-        .modal-download:hover{transform:scale(1.05);}
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: url('img/fon.png') center/cover no-repeat fixed;
+            color: var(--light);
+            min-height: 100vh;
+            overflow-x: hidden;
+        }
 
-        @keyframes modalFadeIn{from{opacity:0;}to{opacity:1;}}
-        @keyframes modalScaleIn{from{transform:scale(0.8);opacity:0;}to{transform:scale(1);opacity:1;}}
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
 
-        @media (max-width:768px){.mods-grid{grid-template-columns:1fr;}}
+        /* Navigation */
+        .navbar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            background: rgba(44, 62, 80, 0.95);
+            backdrop-filter: blur(20px);
+            z-index: 1000;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            animation: slideDown 0.5s ease-out;
+        }
+
+        @keyframes slideDown {
+            from { transform: translateY(-100%); }
+            to { transform: translateY(0); }
+        }
+
+        .navbar-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem 2rem;
+        }
+
+        .navbar-brand {
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: var(--light);
+            text-decoration: none;
+            background: linear-gradient(45deg, var(--primary), var(--accent));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .navbar-nav {
+            display: flex;
+            list-style: none;
+        }
+
+        .nav-item {
+            margin-left: 2rem;
+        }
+
+        .nav-link {
+            color: var(--light);
+            text-decoration: none;
+            font-weight: 500;
+            padding: 0.5rem 1rem;
+            border-radius: var(--border-radius);
+            transition: var(--transition);
+            position: relative;
+        }
+
+        .nav-link:hover {
+            background: rgba(255, 255, 255, 0.1);
+            transform: translateY(-2px);
+        }
+
+        .nav-link.active::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 30px;
+            height: 3px;
+            background: linear-gradient(45deg, var(--primary), var(--accent));
+            border-radius: 2px;
+            animation: growWidth 0.3s ease-out;
+        }
+
+        @keyframes growWidth {
+            from { width: 0; }
+            to { width: 30px; }
+        }
+
+        /* Sidebar */
+        .sidebar {
+            position: fixed;
+            left: 0;
+            top: 0;
+            width: 280px;
+            height: 100vh;
+            background: rgba(44, 62, 80, 0.95);
+            backdrop-filter: blur(20px);
+            border-right: 1px solid rgba(255, 255, 255, 0.1);
+            padding: 2rem;
+            overflow-y: auto;
+            animation: slideInLeft 0.5s ease-out 0.2s both;
+        }
+
+        @keyframes slideInLeft {
+            from { transform: translateX(-100%); opacity: 0; }
+            to { transform: translateX(0); opacity: 1; }
+        }
+
+        .sidebar-title {
+            font-size: 1.4rem;
+            font-weight: 600;
+            margin-bottom: 2rem;
+            color: var(--light);
+        }
+
+        .sidebar-menu {
+            list-style: none;
+        }
+
+        .sidebar-item {
+            margin-bottom: 0.5rem;
+        }
+
+        .sidebar-link {
+            display: block;
+            color: var(--light);
+            text-decoration: none;
+            padding: 1rem;
+            border-radius: var(--border-radius);
+            transition: var(--transition);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .sidebar-link::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+            transition: left 0.5s;
+        }
+
+        .sidebar-link:hover::before {
+            left: 100%;
+        }
+
+        .sidebar-link:hover {
+            background: rgba(255, 255, 255, 0.1);
+            transform: translateX(5px);
+        }
+
+        .sidebar-link.active {
+            background: linear-gradient(45deg, var(--primary), var(--secondary));
+            box-shadow: var(--shadow);
+        }
+
+        .submenu {
+            margin-left: 1rem;
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.3s ease;
+        }
+
+        .submenu.show {
+            max-height: 200px;
+        }
+
+        .submenu-title {
+            font-size: 0.9rem;
+            color: rgba(255, 255, 255, 0.7);
+            margin: 0.5rem 0;
+            padding: 0.5rem;
+        }
+
+        /* Content Container */
+        .content-container {
+            margin-left: 280px;
+            background: rgba(0,0,0,0.3);
+            border-radius: 15px;
+            padding: 20px;
+            min-height: calc(100vh - 40px);
+            margin: 20px 20px 20px 300px;
+        }
+
+        /* Main Content */
+        .main-content {
+            min-height: 100vh;
+            padding-top: 80px;
+        }
+
+        /* Hero Section */
+        .hero {
+            background: linear-gradient(135deg, rgba(102, 126, 234, 0.1), rgba(118, 75, 162, 0.1));
+            padding: 4rem 2rem;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><defs><pattern id="grain" width="100" height="100" patternUnits="userSpaceOnUse"><circle cx="25" cy="25" r="1" fill="rgba(255,255,255,0.1)"/><circle cx="75" cy="75" r="1" fill="rgba(255,255,255,0.1)"/><circle cx="50" cy="10" r="0.5" fill="rgba(255,255,255,0.05)"/></pattern></defs><rect width="100" height="100" fill="url(%23grain)"/></svg>');
+            opacity: 0.5;
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 1;
+            animation: fadeInUp 1s ease-out;
+        }
+
+        .hero h1 {
+            font-size: 3.5rem;
+            font-weight: 800;
+            margin-bottom: 1rem;
+            background: linear-gradient(45deg, var(--light), var(--accent));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .hero p {
+            font-size: 1.3rem;
+            margin-bottom: 2rem;
+            color: rgba(255, 255, 255, 0.9);
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+            line-height: 1.6;
+        }
+
+        .cta-btn {
+            background: linear-gradient(45deg, var(--primary), var(--secondary));
+            color: white;
+            padding: 1rem 2rem;
+            border-radius: var(--border-radius);
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 1.1rem;
+            display: inline-block;
+            transition: var(--transition);
+            box-shadow: var(--shadow);
+        }
+
+        .cta-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 15px 40px rgba(0,0,0,0.4);
+        }
+
+        /* About Section */
+        .about {
+            padding: 4rem 2rem;
+            background: rgba(255, 255, 255, 0.05);
+        }
+
+        .section-title {
+            text-align: center;
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 3rem;
+            background: linear-gradient(45deg, var(--primary), var(--accent));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .about-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+
+        .about-card {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            border-radius: var(--border-radius);
+            padding: 2rem;
+            text-align: center;
+            transition: var(--transition);
+            animation: fadeInUp 0.6s ease-out both;
+        }
+
+        .about-card:nth-child(1) { animation-delay: 0.1s; }
+        .about-card:nth-child(2) { animation-delay: 0.2s; }
+        .about-card:nth-child(3) { animation-delay: 0.3s; }
+
+        .about-card:hover {
+            transform: translateY(-10px);
+            background: rgba(255, 255, 255, 0.15);
+        }
+
+        .about-icon {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            display: block;
+        }
+
+        .about-card h3 {
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+            color: var(--light);
+        }
+
+        .about-card p {
+            color: rgba(255, 255, 255, 0.8);
+            line-height: 1.6;
+        }
+
+        /* Mods Section */
+        .mods {
+            padding: 4rem 2rem;
+            background: rgba(255, 255, 255, 0.02);
+            display: none;
+        }
+
+        .mods.show {
+            display: block;
+        }
+
+        .mods-controls {
+            display: flex;
+            justify-content: center;
+            margin-bottom: 2rem;
+        }
+
+        .view-toggle {
+            background: rgba(255, 255, 255, 0.1);
+            border: 2px solid transparent;
+            color: var(--light);
+            padding: 0.75rem 1.5rem;
+            border-radius: var(--border-radius);
+            margin: 0 0.5rem;
+            cursor: pointer;
+            transition: var(--transition);
+            font-size: 1.2rem;
+        }
+
+        .view-toggle:hover {
+            background: rgba(255, 255, 255, 0.2);
+        }
+
+        .view-toggle.active {
+            background: linear-gradient(45deg, var(--primary), var(--secondary));
+            border-color: var(--primary);
+        }
+
+        .mods-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+            gap: 2rem;
+        }
+
+        .mods-grid.list {
+            grid-template-columns: 1fr;
+        }
+
+        .mod-card {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            border-radius: var(--border-radius);
+            overflow: hidden;
+            transition: var(--transition);
+            animation: fadeInUp 0.6s ease-out both;
+            cursor: pointer;
+        }
+
+        .mod-card:hover {
+            transform: translateY(-10px);
+            box-shadow: var(--shadow);
+            background: rgba(255, 255, 255, 0.15);
+        }
+
+        .mod-image {
+            height: 200px;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .mod-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: var(--transition);
+        }
+
+        .mod-card:hover .mod-image img {
+            transform: scale(1.1);
+        }
+
+        .mod-content {
+            padding: 1.5rem;
+        }
+
+        .mod-title {
+            font-size: 1.4rem;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+            color: var(--light);
+        }
+
+        .mod-description {
+            color: rgba(255, 255, 255, 0.8);
+            line-height: 1.6;
+            margin-bottom: 1rem;
+        }
+
+        .mod-meta {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 0.9rem;
+            color: rgba(255, 255, 255, 0.6);
+        }
+
+        /* Modal */
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 2000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.8);
+            backdrop-filter: blur(10px);
+            animation: fadeIn 0.3s ease-out;
+        }
+
+        .modal-content {
+            background: var(--dark);
+            margin: 5% auto;
+            padding: 0;
+            border-radius: var(--border-radius);
+            width: 90%;
+            max-width: 800px;
+            position: relative;
+            box-shadow: var(--shadow);
+            animation: slideIn 0.3s ease-out;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        @keyframes slideIn {
+            from { transform: translateY(-50px); opacity: 0; }
+            to { transform: translateY(0); opacity: 1; }
+        }
+
+        .modal-header {
+            background: linear-gradient(45deg, var(--primary), var(--secondary));
+            padding: 2rem;
+            text-align: center;
+            border-radius: var(--border-radius) var(--border-radius) 0 0;
+        }
+
+        .modal-title {
+            color: white;
+            font-size: 2rem;
+            font-weight: 700;
+            margin: 0;
+        }
+
+        .modal-close {
+            position: absolute;
+            top: 1rem;
+            right: 1.5rem;
+            font-size: 2rem;
+            color: white;
+            cursor: pointer;
+            transition: var(--transition);
+        }
+
+        .modal-close:hover {
+            transform: scale(1.2);
+        }
+
+        .modal-body {
+            padding: 2rem;
+            max-height: 70vh;
+            overflow-y: auto;
+        }
+
+        .modal-screenshots {
+            display: flex;
+            justify-content: center;
+            margin: 1.5rem 0;
+        }
+
+        .modal-screenshot {
+            max-width: 100%;
+            border-radius: var(--border-radius);
+            box-shadow: var(--shadow);
+        }
+
+        .modal-description {
+            background: rgba(255, 255, 255, 0.1);
+            padding: 1.5rem;
+            border-radius: var(--border-radius);
+            margin-bottom: 1.5rem;
+            line-height: 1.6;
+            color: var(--light);
+        }
+
+        .modal-download {
+            display: inline-block;
+            background: linear-gradient(45deg, var(--success), #2ecc71);
+            color: white;
+            padding: 1rem 2rem;
+            border-radius: var(--border-radius);
+            text-decoration: none;
+            font-weight: 600;
+            transition: var(--transition);
+            box-shadow: var(--shadow);
+        }
+
+        .modal-download:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 15px 40px rgba(0,0,0,0.4);
+        }
+
+        /* Animations */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Responsive */
+        @media (max-width: 1024px) {
+            .sidebar {
+                transform: translateX(-100%);
+            }
+
+            .sidebar.show {
+                transform: translateX(0);
+            }
+
+            .main-content {
+                margin-left: 0;
+            }
+
+            .mods-grid {
+                grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            }
+        }
+
+        @media (max-width: 768px) {
+            .navbar-content {
+                padding: 1rem;
+            }
+
+            .navbar-brand {
+                font-size: 1.5rem;
+            }
+
+            .nav-item {
+                margin-left: 1rem;
+            }
+
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+
+            .hero p {
+                font-size: 1.1rem;
+            }
+
+            .about-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .mods-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .modal-content {
+                width: 95%;
+                margin: 2rem auto;
+            }
+        }
+
+        /* Scrollbar */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: rgba(255, 255, 255, 0.1);
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: var(--primary);
+            border-radius: 4px;
+        }
+
+        ::-webkit-scrollbar-thumb:hover {
+            background: var(--secondary);
+        }
     </style>
 </head>
 <body>
 
 
-    <section class="mods-header">
-        <h1>Раздел модов</h1>
-        <p>Исследуйте разнообразие модов для Hytale и расширьте свой игровой опыт!</p>
-    </section>
-
-    <section id="mods" class="mods-container">
-        <div class="mods-section">
-            <div class="sidebar" id="sidebar">
-                <ul>
-                    <li><button class="filter-btn active" data-category="all">Все</button></li>
-                    <li><button class="filter-btn" data-category="graphics">Графика</button></li>
-                    <li><button class="filter-btn" data-category="items">Предметы</button></li>
-                    <li><button class="filter-btn" data-category="biomes">Биомы</button></li>
-                    <li><button class="filter-btn" data-category="sound">Звук</button></li>
-                    <li><button class="filter-btn" data-category="minigames">Мини-игры</button></li>
-                    <li><button class="filter-btn" data-category="multiplayer">Мультиплеер</button></li>
-                    <li><button class="filter-btn" data-category="packs">Пакеты</button></li>
+    <aside class="sidebar">
+        <h2 class="sidebar-title">Навигация</h2>
+        <ul class="sidebar-menu">
+            <li class="sidebar-item">
+                <a href="#home" class="sidebar-link active" id="nav-home">🏠 Главная</a>
+            </li>
+            <li class="sidebar-item">
+                <a href="#about" class="sidebar-link" id="nav-about">ℹ️ О сайте</a>
+            </li>
+            <li class="sidebar-item">
+                <a href="#" class="sidebar-link" id="nav-mods">🧩 Моды</a>
+                <ul class="submenu" id="mods-submenu">
+                    <li class="submenu-title">Категории</li>
+                    <li><a href="#" class="sidebar-link" data-category="spb-naberezhnaya">🏙️ СПБ - Набережная</a></li>
                 </ul>
-            </div>
-            <div class="mods-main">
-                <div class="view-controls">
-                    <button id="list-view-btn" class="active">☰</button>
-                    <button id="grid-view-btn">□□□</button>
-                </div>
-                <div class="mods-grid list-view">
-            <div class="mod-card" data-category="graphics">
-                <div class="mod-placeholder">🖼️</div>
-                <div class="content">
-                    <h3>Мод 1</h3>
-                    <p>Описание первого мода. Добавляет новые возможности в игру.</p>
-                </div>
-            </div>
-            <div class="mod-card" data-category="graphics">
-                <div class="mod-placeholder">🖼️</div>
-                <div class="content">
-                    <h3>Мод 2</h3>
-                    <p>Описание второго мода. Улучшает графику и эффекты.</p>
+            </li>
+        </ul>
+    </aside>
+
+    <div class="content-container">
+        <main class="main-content">
+        <section id="home" class="hero">
+            <div class="container">
+                <div class="hero-content">
+                    <h1>Добро пожаловать в мир модов Hytale</h1>
+                    <p>Откройте для себя бесконечные возможности модификаций. Создавайте, делитесь и наслаждайтесь уникальными дополнениями для вашей любимой игры.</p>
+                    <a href="#mods" class="cta-btn">Посмотреть моды</a>
                 </div>
             </div>
-            <div class="mod-card" data-category="items">
-                <div class="mod-placeholder">🖼️</div>
-                <div class="content">
-                    <h3>Мод 3</h3>
-                    <p>Описание третьего мода. Добавляет новые предметы и рецепты.</p>
+        </section>
+
+        <section id="about" class="about">
+            <div class="container">
+                <h2 class="section-title">О нашем проекте</h2>
+                <div class="about-grid">
+                    <div class="about-card">
+                        <span class="about-icon">🎨</span>
+                        <h3>Творчество</h3>
+                        <p>Выразите свою фантазию через уникальные моды и дополнения для Hytale.</p>
+                    </div>
+                    <div class="about-card">
+                        <span class="about-icon">👥</span>
+                        <h3>Сообщество</h3>
+                        <p>Присоединяйтесь к тысячам моддеров и игроков со всего мира.</p>
+                    </div>
+                    <div class="about-card">
+                        <span class="about-icon">🚀</span>
+                        <h3>Инновации</h3>
+                        <p>Будьте на переднем крае игровых технологий и моддинга.</p>
+                    </div>
                 </div>
             </div>
-            <div class="mod-card" data-category="gameplay">
-                <div class="mod-placeholder">🖼️</div>
-                <div class="content">
-                    <h3>Мод 4</h3>
-                    <p>Описание четвертого мода. Изменяет геймплей.</p>
+        </section>
+
+        <section id="mods" class="mods">
+            <div class="container">
+                <h2 class="section-title">Моды</h2>
+                <div class="mods-controls">
+                    <button class="view-toggle active" id="grid-view">⊞ Сетка</button>
+                    <button class="view-toggle" id="list-view">☰ Список</button>
+                </div>
+                <div class="mods-grid" id="mods-grid">
+                    <article class="mod-card" data-category="spb-naberezhnaya">
+                        <div class="mod-image">
+                            <img src="mods/models/SPB_Wah - Набережная - рещётка 1.png" alt="Решётка - Линейка">
+                        </div>
+                        <div class="mod-content">
+                            <h3 class="mod-title">Решётка - Линейка</h3>
+                            <p class="mod-description">Этот мод добавляет элегантные решётки вдоль набережной в СПб, создавая неповторимую атмосферу мечты и романтики.</p>
+                            <div class="mod-meta">
+                                <span>Автор: HGO</span>
+                                <span>Версия: 1.0</span>
+                            </div>
+                        </div>
+                    </article>
                 </div>
             </div>
-            <div class="mod-card" data-category="biomes">
-                <div class="mod-placeholder">🖼️</div>
-                <div class="content">
-                    <h3>Мод 5</h3>
-                    <p>Описание пятого мода. Добавляет новые биомы.</p>
-                </div>
-            </div>
-            <div class="mod-card" data-category="sound">
-                <div class="mod-placeholder">🖼️</div>
-                <div class="content">
-                    <h3>Мод 6</h3>
-                    <p>Описание шестого мода. Улучшает звук и музыку.</p>
-                </div>
-            </div>
-            <div class="mod-card" data-category="minigames">
-                <div class="mod-placeholder">🖼️</div>
-                <div class="content">
-                    <h3>Мод 7</h3>
-                    <p>Описание седьмого мода. Добавляет мини-игры.</p>
-                </div>
-            </div>
-            <div class="mod-card" data-category="multiplayer">
-                <div class="mod-placeholder">🖼️</div>
-                <div class="content">
-                    <h3>Мод 8</h3>
-                    <p>Описание восьмого мода. Расширяет мультиплеер.</p>
-                </div>
-            </div>
-            <div class="mod-card" data-category="packs">
-                <div class="mod-placeholder">🖼️</div>
-                <div class="content">
-                    <h3>Мод 9</h3>
-                    <p>Описание девятого мода. Полный пакет дополнений.</p>
-                </div>
-            </div>
-        </div>
-    </section>
+        </section>
+    </main>
+    </div>
 
     <div id="mod-modal" class="modal">
         <div class="modal-content">
             <div class="modal-header">
-                <h2 id="modal-title"></h2>
+                <h2 class="modal-title" id="modal-title">Решётка - Линейка</h2>
+                <span class="modal-close">&times;</span>
             </div>
-            <span class="close-modal">&times;</span>
             <div class="modal-body">
                 <div class="modal-screenshots">
-                    <span class="screenshot">🖼️</span>
-                    <span class="screenshot">🖼️</span>
-                    <span class="screenshot">🖼️</span>
+                    <img class="modal-screenshot" src="mods/models/SPB_Wah - Набережная - рещётка 1.png" alt="Скриншот мода">
                 </div>
-                <p id="modal-description" class="modal-description"></p>
-                <p class="modal-author">Автор: HGO</p>
-                <button class="modal-download">Скачать</button>
+                <p class="modal-description" id="modal-description">
+                    Этот мод добавляет элегантные решётки вдоль набережной в СПб, создавая неповторимую атмосферу мечты и романтики. Идеально для любителей архитектуры и городского пейзажа, добавляя шарм и детали в виртуальный мир.
+                </p>
+                <a href="mods/models/SPB_Wah - Набережная - рещётка 1.zip" class="modal-download" download>📥 Скачать мод</a>
             </div>
         </div>
     </div>
 
     <script>
-        const sidebar = document.getElementById('sidebar');
-        const filterButtons = document.querySelectorAll('.filter-btn');
-        const modCards = document.querySelectorAll('.mod-card');
-        const listViewBtn = document.getElementById('list-view-btn');
-        const gridViewBtn = document.getElementById('grid-view-btn');
+        // Navigation
+        const navLinks = document.querySelectorAll('.nav-link, .sidebar-link');
+        const sections = document.querySelectorAll('section');
 
-        listViewBtn.addEventListener('click', () => {
-            const modsGrid = document.querySelector('.mods-grid');
-            modsGrid.classList.remove('grid-view');
-            modsGrid.classList.add('list-view');
-            listViewBtn.classList.add('active');
-            gridViewBtn.classList.remove('active');
+        function updateActiveNav() {
+            let current = '';
+            sections.forEach(section => {
+                const sectionTop = section.offsetTop;
+                const sectionHeight = section.clientHeight;
+                if (pageYOffset >= sectionTop - sectionHeight / 3) {
+                    current = section.getAttribute('id');
+                }
+            });
+
+            navLinks.forEach(link => {
+                link.classList.remove('active');
+                if (link.getAttribute('href') === '#' + current) {
+                    link.classList.add('active');
+                }
+            });
+        }
+
+        window.addEventListener('scroll', updateActiveNav);
+        updateActiveNav();
+
+        // Sidebar navigation
+        const sidebarLinks = document.querySelectorAll('.sidebar-link');
+        const aboutSection = document.getElementById('about');
+        const modsSection = document.getElementById('mods');
+        const modsSubmenu = document.getElementById('mods-submenu');
+
+        document.getElementById('nav-home').addEventListener('click', (e) => {
+            e.preventDefault();
+            aboutSection.style.display = 'block';
+            modsSection.classList.remove('show');
+            sidebarLinks.forEach(link => link.classList.remove('active'));
+            e.target.classList.add('active');
         });
 
+        document.getElementById('nav-about').addEventListener('click', (e) => {
+            e.preventDefault();
+            aboutSection.style.display = 'block';
+            modsSection.classList.remove('show');
+            sidebarLinks.forEach(link => link.classList.remove('active'));
+            e.target.classList.add('active');
+        });
+
+        document.getElementById('nav-mods').addEventListener('click', (e) => {
+            e.preventDefault();
+            modsSubmenu.classList.toggle('show');
+        });
+
+        // Для категории
+        document.querySelector('a[data-category="spb-naberezhnaya"]').addEventListener('click', (e) => {
+            e.preventDefault();
+            aboutSection.style.display = 'none';
+            modsSection.classList.add('show');
+            document.getElementById('mods').scrollIntoView({ behavior: 'smooth' });
+        });
+
+        // View toggles
+        const gridViewBtn = document.getElementById('grid-view');
+        const listViewBtn = document.getElementById('list-view');
+        const modsGrid = document.getElementById('mods-grid');
+
         gridViewBtn.addEventListener('click', () => {
-            const modsGrid = document.querySelector('.mods-grid');
-            modsGrid.classList.remove('list-view');
-            modsGrid.classList.add('grid-view');
+            modsGrid.classList.remove('list');
             gridViewBtn.classList.add('active');
             listViewBtn.classList.remove('active');
         });
 
-        filterButtons.forEach(btn => {
-            btn.addEventListener('click', () => {
-                filterButtons.forEach(b => b.classList.remove('active'));
-                btn.classList.add('active');
-                const category = btn.dataset.category;
-                modCards.forEach(card => {
-                    if (category === 'all' || card.dataset.category === category) {
-                        card.style.display = 'block';
-                    } else {
-                        card.style.display = 'none';
-                    }
+        listViewBtn.addEventListener('click', () => {
+            modsGrid.classList.add('list');
+            listViewBtn.classList.add('active');
+            gridViewBtn.classList.remove('active');
+        });
+
+        // Mod cards interaction
+        const modCards = document.querySelectorAll('.mod-card');
+        const modal = document.getElementById('mod-modal');
+        const modalTitle = document.getElementById('modal-title');
+        const modalDescription = document.getElementById('modal-description');
+
+        modCards.forEach(card => {
+            card.addEventListener('click', () => {
+                const title = card.querySelector('.mod-title').textContent;
+                const description = card.querySelector('.mod-description').textContent;
+
+                modalTitle.textContent = title;
+                modalDescription.textContent = description;
+                modal.style.display = 'block';
+            });
+        });
+
+        // Modal close
+        document.querySelector('.modal-close').addEventListener('click', () => {
+            modal.style.display = 'none';
+        });
+
+        modal.addEventListener('click', (e) => {
+            if (e.target === modal) {
+                modal.style.display = 'none';
+            }
+        });
+
+        // Smooth scrolling
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                document.querySelector(this.getAttribute('href')).scrollIntoView({
+                    behavior: 'smooth'
                 });
             });
         });
 
-        modCards.forEach(card => {
-            card.addEventListener('click', () => {
-                const title = card.querySelector('h3').textContent;
-                const desc = card.querySelector('p').textContent;
-                document.getElementById('modal-title').textContent = title;
-                document.getElementById('modal-description').textContent = desc;
-                document.getElementById('mod-modal').style.display = 'block';
+        // Intersection Observer for animations
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = '1';
+                    entry.target.style.transform = 'translateY(0)';
+                }
             });
-        });
+        }, observerOptions);
 
-        document.querySelector('.close-modal').addEventListener('click', () => {
-            document.getElementById('mod-modal').style.display = 'none';
-        });
-
-        document.getElementById('mod-modal').addEventListener('click', (e) => {
-            if (e.target === document.getElementById('mod-modal')) {
-                document.getElementById('mod-modal').style.display = 'none';
-            }
+        document.querySelectorAll('.about-card, .mod-card').forEach(card => {
+            card.style.opacity = '0';
+            card.style.transform = 'translateY(30px)';
+            card.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+            observer.observe(card);
         });
     </script>
 </body>
