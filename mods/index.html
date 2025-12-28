@@ -165,6 +165,7 @@
             transition: var(--transition);
             position: relative;
             overflow: hidden;
+            white-space: nowrap;
         }
 
         .sidebar-link::before {
@@ -222,7 +223,6 @@
 
         /* Main Content */
         .main-content {
-            min-height: 100vh;
             padding-top: 80px;
         }
 
@@ -290,65 +290,7 @@
             box-shadow: 0 15px 40px rgba(0,0,0,0.4);
         }
 
-        /* About Section */
-        .about {
-            padding: 4rem 2rem;
-            background: rgba(255, 255, 255, 0.05);
-        }
 
-        .section-title {
-            text-align: center;
-            font-size: 2.5rem;
-            font-weight: 700;
-            margin-bottom: 3rem;
-            background: linear-gradient(45deg, var(--primary), var(--accent));
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-        }
-
-        .about-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 2rem;
-        }
-
-        .about-card {
-            background: rgba(255, 255, 255, 0.1);
-            backdrop-filter: blur(10px);
-            border: 1px solid rgba(255, 255, 255, 0.2);
-            border-radius: var(--border-radius);
-            padding: 2rem;
-            text-align: center;
-            transition: var(--transition);
-            animation: fadeInUp 0.6s ease-out both;
-        }
-
-        .about-card:nth-child(1) { animation-delay: 0.1s; }
-        .about-card:nth-child(2) { animation-delay: 0.2s; }
-        .about-card:nth-child(3) { animation-delay: 0.3s; }
-
-        .about-card:hover {
-            transform: translateY(-10px);
-            background: rgba(255, 255, 255, 0.15);
-        }
-
-        .about-icon {
-            font-size: 3rem;
-            margin-bottom: 1rem;
-            display: block;
-        }
-
-        .about-card h3 {
-            font-size: 1.5rem;
-            margin-bottom: 1rem;
-            color: var(--light);
-        }
-
-        .about-card p {
-            color: rgba(255, 255, 255, 0.8);
-            line-height: 1.6;
-        }
 
         /* Mods Section */
         .mods {
@@ -457,6 +399,16 @@
             color: rgba(255, 255, 255, 0.6);
         }
 
+        .mod-meta span:first-child {
+            color: blue;
+            font-weight: bold;
+        }
+
+        .mod-meta span:last-child {
+            color: red;
+            font-weight: bold;
+        }
+
         /* Modal */
         .modal {
             display: none;
@@ -530,7 +482,9 @@
         .modal-screenshots {
             display: flex;
             justify-content: center;
+            align-items: center;
             margin: 1.5rem 0;
+            position: relative;
         }
 
         .modal-screenshot {
@@ -539,13 +493,67 @@
             box-shadow: var(--shadow);
         }
 
-        .modal-description {
+        .modal-nav {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            background: rgba(0,0,0,0.5);
+            border: none;
+            color: white;
+            font-size: 2rem;
+            cursor: pointer;
+            padding: 0.5rem;
+            border-radius: 50%;
+            transition: var(--transition);
+            z-index: 10;
+        }
+
+        .modal-nav:hover {
+            background: rgba(0,0,0,0.7);
+        }
+
+        .modal-prev {
+            left: 1rem;
+        }
+
+        .modal-next {
+            right: 1rem;
+        }
+
+        .modal-tabs {
+            display: flex;
+            justify-content: center;
+            margin: 1.5rem 0;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+        }
+
+        .modal-tab {
+            background: none;
+            border: none;
+            color: rgba(255, 255, 255, 0.7);
+            padding: 0.75rem 1.5rem;
+            cursor: pointer;
+            transition: var(--transition);
+            border-bottom: 2px solid transparent;
+        }
+
+        .modal-tab.active {
+            color: var(--light);
+            border-bottom-color: var(--primary);
+        }
+
+        .modal-tab:hover {
+            color: var(--light);
+        }
+
+        .modal-tab-content {
             background: rgba(255, 255, 255, 0.1);
             padding: 1.5rem;
             border-radius: var(--border-radius);
             margin-bottom: 1.5rem;
             line-height: 1.6;
             color: var(--light);
+            min-height: 100px;
         }
 
         .modal-download {
@@ -657,16 +665,17 @@
         <h2 class="sidebar-title">Навигация</h2>
         <ul class="sidebar-menu">
             <li class="sidebar-item">
-                <a href="#home" class="sidebar-link active" id="nav-home">🏠 Главная</a>
+                <a href="#home" class="sidebar-link" id="nav-home">🏠 Главная</a>
             </li>
             <li class="sidebar-item">
-                <a href="#about" class="sidebar-link" id="nav-about">ℹ️ О сайте</a>
-            </li>
-            <li class="sidebar-item">
-                <a href="#" class="sidebar-link" id="nav-mods">🧩 Моды</a>
+                <a href="#" class="sidebar-link" id="nav-mods">Моды</a>
                 <ul class="submenu" id="mods-submenu">
-                    <li class="submenu-title">Категории</li>
-                    <li><a href="#" class="sidebar-link" data-category="spb-naberezhnaya">🏙️ СПБ - Набережная</a></li>
+                    <li class="submenu-item">
+                        <a href="#" class="sidebar-link" id="nav-spb-dream">🏙️ СПБ моей мечты</a>
+                        <ul class="submenu" id="spb-submenu">
+                            <li><a href="#" class="sidebar-link" data-category="spb-naberezhnaya">🏙️ СПБ - Набережная</a></li>
+                        </ul>
+                    </li>
                 </ul>
             </li>
         </ul>
@@ -679,37 +688,14 @@
                 <div class="hero-content">
                     <h1>Добро пожаловать в мир модов Hytale</h1>
                     <p>Откройте для себя бесконечные возможности модификаций. Создавайте, делитесь и наслаждайтесь уникальными дополнениями для вашей любимой игры.</p>
-                    <a href="#mods" class="cta-btn">Посмотреть моды</a>
                 </div>
             </div>
         </section>
 
-        <section id="about" class="about">
-            <div class="container">
-                <h2 class="section-title">О нашем проекте</h2>
-                <div class="about-grid">
-                    <div class="about-card">
-                        <span class="about-icon">🎨</span>
-                        <h3>Творчество</h3>
-                        <p>Выразите свою фантазию через уникальные моды и дополнения для Hytale.</p>
-                    </div>
-                    <div class="about-card">
-                        <span class="about-icon">👥</span>
-                        <h3>Сообщество</h3>
-                        <p>Присоединяйтесь к тысячам моддеров и игроков со всего мира.</p>
-                    </div>
-                    <div class="about-card">
-                        <span class="about-icon">🚀</span>
-                        <h3>Инновации</h3>
-                        <p>Будьте на переднем крае игровых технологий и моддинга.</p>
-                    </div>
-                </div>
-            </div>
-        </section>
+
 
         <section id="mods" class="mods">
             <div class="container">
-                <h2 class="section-title">Моды</h2>
                 <div class="mods-controls">
                     <button class="view-toggle active" id="grid-view">⊞ Сетка</button>
                     <button class="view-toggle" id="list-view">☰ Список</button>
@@ -742,12 +728,21 @@
             </div>
             <div class="modal-body">
                 <div class="modal-screenshots">
-                    <img class="modal-screenshot" src="mods/models/SPB_Wah - Набережная - рещётка 1.png" alt="Скриншот мода">
+                    <button class="modal-nav modal-prev"><</button>
+                    <img class="modal-screenshot" id="modal-screenshot" src="mods/models/SPB_Wah - Набережная - рещётка 1.png" alt="Скриншот мода">
+                    <button class="modal-nav modal-next">></button>
                 </div>
-                <p class="modal-description" id="modal-description">
+                <div class="modal-tabs">
+                    <button class="modal-tab active" data-tab="description">Описание</button>
+                    <button class="modal-tab" data-tab="version">Версия</button>
+                </div>
+                <div class="modal-tab-content" id="tab-description">
                     Этот мод добавляет элегантные решётки вдоль набережной в СПб, создавая неповторимую атмосферу мечты и романтики. Идеально для любителей архитектуры и городского пейзажа, добавляя шарм и детали в виртуальный мир.
-                </p>
-                <a href="mods/models/SPB_Wah - Набережная - рещётка 1.zip" class="modal-download" download>📥 Скачать мод</a>
+                </div>
+                <div class="modal-tab-content" id="tab-version" style="display: none;">
+                    Версия: 1.0
+                </div>
+                <a href="mods/models/SPB_Wah - Набережная - рещётка 1.zip" class="modal-download" id="modal-download" download>📥 Скачать мод</a>
             </div>
         </div>
     </div>
@@ -769,7 +764,7 @@
 
             navLinks.forEach(link => {
                 link.classList.remove('active');
-                if (link.getAttribute('href') === '#' + current) {
+                if (link.getAttribute('href') === '#' + current && link.id !== 'nav-home') {
                     link.classList.add('active');
                 }
             });
@@ -780,24 +775,15 @@
 
         // Sidebar navigation
         const sidebarLinks = document.querySelectorAll('.sidebar-link');
-        const aboutSection = document.getElementById('about');
         const modsSection = document.getElementById('mods');
         const modsSubmenu = document.getElementById('mods-submenu');
+        const spbSubmenu = document.getElementById('spb-submenu');
 
         document.getElementById('nav-home').addEventListener('click', (e) => {
             e.preventDefault();
-            aboutSection.style.display = 'block';
+            document.getElementById('home').style.display = 'block';
             modsSection.classList.remove('show');
-            sidebarLinks.forEach(link => link.classList.remove('active'));
-            e.target.classList.add('active');
-        });
-
-        document.getElementById('nav-about').addEventListener('click', (e) => {
-            e.preventDefault();
-            aboutSection.style.display = 'block';
-            modsSection.classList.remove('show');
-            sidebarLinks.forEach(link => link.classList.remove('active'));
-            e.target.classList.add('active');
+            document.getElementById('home').scrollIntoView({ behavior: 'smooth' });
         });
 
         document.getElementById('nav-mods').addEventListener('click', (e) => {
@@ -805,10 +791,15 @@
             modsSubmenu.classList.toggle('show');
         });
 
+        document.getElementById('nav-spb-dream').addEventListener('click', (e) => {
+            e.preventDefault();
+            spbSubmenu.classList.toggle('show');
+        });
+
         // Для категории
         document.querySelector('a[data-category="spb-naberezhnaya"]').addEventListener('click', (e) => {
             e.preventDefault();
-            aboutSection.style.display = 'none';
+            document.getElementById('home').style.display = 'none';
             modsSection.classList.add('show');
             document.getElementById('mods').scrollIntoView({ behavior: 'smooth' });
         });
@@ -835,15 +826,56 @@
         const modal = document.getElementById('mod-modal');
         const modalTitle = document.getElementById('modal-title');
         const modalDescription = document.getElementById('modal-description');
+        const tabDescription = document.getElementById('tab-description');
+        const tabVersion = document.getElementById('tab-version');
+        const modalDownload = document.getElementById('modal-download');
+        const modalScreenshot = document.getElementById('modal-screenshot');
+
+        let modalImages = [];
+        let currentImageIndex = 0;
 
         modCards.forEach(card => {
             card.addEventListener('click', () => {
                 const title = card.querySelector('.mod-title').textContent;
                 const description = card.querySelector('.mod-description').textContent;
+                const imageSrc = card.querySelector('.mod-image img').src;
+                const downloadHref = card.querySelector('.mod-image img').src.replace('.png', '.zip'); // Предполагаем, что zip имеет такое же имя
 
                 modalTitle.textContent = title;
-                modalDescription.textContent = description;
+                tabDescription.textContent = description;
+                tabVersion.textContent = 'Версия: 1.0'; // Можно динамически брать из meta
+                modalDownload.href = downloadHref;
+
+                // Для демонстрации, добавим несколько изображений (в реальности брать из папки или атрибута)
+                modalImages = [imageSrc]; // Пока одно, но можно добавить больше
+                currentImageIndex = 0;
+                modalScreenshot.src = modalImages[currentImageIndex];
+
                 modal.style.display = 'block';
+            });
+        });
+
+        // Modal image navigation
+        document.querySelector('.modal-prev').addEventListener('click', () => {
+            currentImageIndex = (currentImageIndex - 1 + modalImages.length) % modalImages.length;
+            modalScreenshot.src = modalImages[currentImageIndex];
+        });
+
+        document.querySelector('.modal-next').addEventListener('click', () => {
+            currentImageIndex = (currentImageIndex + 1) % modalImages.length;
+            modalScreenshot.src = modalImages[currentImageIndex];
+        });
+
+        // Modal tabs
+        const modalTabs = document.querySelectorAll('.modal-tab');
+        const tabContents = document.querySelectorAll('.modal-tab-content');
+
+        modalTabs.forEach(tab => {
+            tab.addEventListener('click', () => {
+                modalTabs.forEach(t => t.classList.remove('active'));
+                tabContents.forEach(c => c.style.display = 'none');
+                tab.classList.add('active');
+                document.getElementById('tab-' + tab.dataset.tab).style.display = 'block';
             });
         });
 
@@ -861,10 +893,13 @@
         // Smooth scrolling
         document.querySelectorAll('a[href^="#"]').forEach(anchor => {
             anchor.addEventListener('click', function (e) {
-                e.preventDefault();
-                document.querySelector(this.getAttribute('href')).scrollIntoView({
-                    behavior: 'smooth'
-                });
+                const href = this.getAttribute('href');
+                if (href !== '#') {
+                    e.preventDefault();
+                    document.querySelector(href).scrollIntoView({
+                        behavior: 'smooth'
+                    });
+                }
             });
         });
 
@@ -883,7 +918,7 @@
             });
         }, observerOptions);
 
-        document.querySelectorAll('.about-card, .mod-card').forEach(card => {
+        document.querySelectorAll('.mod-card').forEach(card => {
             card.style.opacity = '0';
             card.style.transform = 'translateY(30px)';
             card.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
