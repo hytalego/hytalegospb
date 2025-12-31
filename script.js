@@ -1,6 +1,9 @@
 // Таймер: до выхода игры
 const releaseDate = new Date(2026, 0, 13, 18, 0, 0); // January 13, 2026, 18:00:00
 
+const infoTabButtons = document.querySelectorAll('.info-tab-btn');
+const infoTabPanes = document.querySelectorAll('.info-tab-pane');
+
 document.addEventListener('DOMContentLoaded', () => {
 
     // Таймер: до выхода игры
@@ -82,8 +85,6 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 
     // Обработка вкладок в info секции
-    const infoTabButtons = document.querySelectorAll('.info-tab-btn');
-    const infoTabPanes = document.querySelectorAll('.info-tab-pane');
 
     infoTabButtons.forEach(btn => {
         btn.addEventListener('click', () => {
@@ -179,23 +180,7 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
-    // Кнопка "Узнать больше" - прокрутка к описанию
-    document.querySelector('.cta').addEventListener('click', () => {
-        document.getElementById('about').scrollIntoView({ behavior: 'smooth' });
-    });
 
-    // Карточка модинг - переключение на вкладку модинг
-    document.querySelector('.modding-special').addEventListener('click', () => {
-        infoTabButtons.forEach(b => b.classList.remove('active'));
-        infoTabPanes.forEach(p => p.classList.remove('active'));
-        document.querySelector('[data-info-tab="modding"]').classList.add('active');
-        document.getElementById('modding').classList.add('active');
-        // Анимация переключения
-        document.querySelector('.modding-special').classList.add('animate');
-        setTimeout(() => {
-            document.querySelector('.modding-special').classList.remove('animate');
-        }, 500);
-    });
 
     // Warning Modal
     const warningModal = document.getElementById('warning-modal');
@@ -293,5 +278,44 @@ document.addEventListener('DOMContentLoaded', () => {
         observer.observe(section);
     });
 
-
 });
+
+// Карточка модинг - переключение на вкладку модинг
+const moddingCard = document.querySelector('.modding-special');
+console.log('moddingCard found:', moddingCard);
+if (moddingCard) {
+    moddingCard.addEventListener('click', () => {
+        console.log('Modding card clicked');
+        // Переключаем на вкладку модинг
+        const infoTabButtons = document.querySelectorAll('.info-tab-btn');
+        const infoTabPanes = document.querySelectorAll('.info-tab-pane');
+        const moddingBtn = document.querySelector('[data-info-tab="modding"]');
+        if (moddingBtn) {
+            infoTabButtons.forEach(b => b.classList.remove('active'));
+            infoTabPanes.forEach(p => p.classList.remove('active'));
+            moddingBtn.classList.add('active');
+            document.getElementById('modding').classList.add('active');
+            console.log('Switched to modding tab');
+            // Прокрутка к секции about
+            const aboutSection = document.getElementById('about');
+            if (aboutSection) aboutSection.scrollIntoView({ behavior: 'smooth' });
+        }
+        // Анимация переключения
+        moddingCard.classList.add('animate');
+        setTimeout(() => {
+            moddingCard.classList.remove('animate');
+        }, 500);
+    });
+}
+
+// Кнопка "Узнать больше" - прокрутка к описанию
+const ctaButton = document.querySelector('button.cta');
+if (ctaButton) {
+    ctaButton.addEventListener('click', function(event) {
+        event.preventDefault();
+        const aboutSection = document.getElementById('about');
+        if (aboutSection) {
+            aboutSection.scrollIntoView({ behavior: 'smooth' });
+        }
+    });
+}
