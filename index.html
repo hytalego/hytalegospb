@@ -99,8 +99,13 @@
 </head>
 <body>
     <div id="release-timer" class="timer release-timer timer-fixed">
-        <div style="margin-bottom: 10px;">До выхода игры осталось:</div>
-        <div><span id="release-days"></span>:<span id="release-hours"></span>:<span id="release-minutes"></span>:<span id="release-seconds"></span></div>
+        <div class="timer-text">
+            <div style="margin-bottom: 10px;">До выхода игры осталось:</div>
+            <div><span id="release-days"></span>:<span id="release-hours"></span>:<span id="release-minutes"></span>:<span id="release-seconds"></span></div>
+        </div>
+        <div class="sound-panel-timer">
+            <button id="play-sound-btn" class="sound-btn-timer">НАЖМИ</button>
+        </div>
     </div>
 
     <div class="sidebar">
@@ -369,6 +374,10 @@
 
 
     <div id="snow-container"></div>
+    <audio id="bg-sound">
+        <source src="data/oh.wav" type="audio/wav">
+        Ваш браузер не поддерживает аудио.
+    </audio>
     <script src="script.js"></script>
 </body>
 </html>

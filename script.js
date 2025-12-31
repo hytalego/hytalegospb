@@ -319,3 +319,15 @@ if (ctaButton) {
         }
     });
 }
+
+// Кнопка включения звука
+const playSoundBtn = document.getElementById('play-sound-btn');
+const bgSound = document.getElementById('bg-sound');
+if (playSoundBtn && bgSound) {
+    playSoundBtn.addEventListener('click', function() {
+        bgSound.play().catch(e => console.log('Audio play failed:', e));
+        playSoundBtn.textContent = 'ЗВУК ВКЛЮЧЕН';
+        playSoundBtn.disabled = true;
+        playSoundBtn.style.animation = 'none';
+    });
+}

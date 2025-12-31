@@ -136,8 +136,6 @@ body {
     display: flex;
     align-items: center;
     justify-content: center;
-    flex-direction: column;
-    text-align: center;
     padding: 1rem;
     overflow: hidden;
 }
@@ -290,6 +288,85 @@ body {
     color: white;
     transform: scale(1.05);
     box-shadow: 0 0 15px rgba(52, 152, 219, 0.5);
+}
+
+/* Sound panel */
+.sound-panel {
+    text-align: center;
+    margin: 1rem 0;
+}
+
+.sound-btn {
+    display: block;
+    width: 100%;
+    padding: 1rem;
+    background: linear-gradient(45deg, #8B0000, #DC143C);
+    border: 3px outset #B22222;
+    border-radius: 10px;
+    color: white;
+    text-align: center;
+    font-size: 0.8rem;
+    font-family: 'Press Start 2P', monospace;
+    transition: all 0.3s ease;
+    box-shadow: inset 0 0 5px rgba(0,0,0,0.5);
+    cursor: pointer;
+}
+
+.sound-btn:hover:not(:disabled) {
+    background: linear-gradient(45deg, #DC143C, #8B0000);
+    transform: scale(1.05);
+    box-shadow: 0 0 15px rgba(220, 20, 60, 0.5);
+}
+
+.sound-btn:disabled {
+    background: #555;
+    cursor: not-allowed;
+    transform: none;
+    box-shadow: none;
+}
+
+/* Sound button in timer */
+.sound-btn-timer {
+    display: block;
+    width: 100%;
+    padding: 1rem;
+    background: linear-gradient(45deg, #8B0000, #DC143C);
+    border: 3px outset #B22222;
+    border-radius: 10px;
+    color: white;
+    text-align: center;
+    font-size: 0.8rem;
+    font-family: 'Press Start 2P', monospace;
+    transition: all 0.3s ease;
+    box-shadow: inset 0 0 5px rgba(0,0,0,0.5);
+    cursor: pointer;
+    animation: strongPulse 0.5s infinite;
+    margin-left: 2rem;
+}
+
+.sound-btn-timer:hover:not(:disabled) {
+    background: linear-gradient(45deg, #DC143C, #8B0000);
+    transform: scale(1.05);
+    box-shadow: 0 0 15px rgba(220, 20, 60, 0.5);
+}
+
+.sound-btn-timer:disabled {
+    background: #555;
+    cursor: not-allowed;
+    transform: none;
+    box-shadow: none;
+}
+
+/* Strong pulse animation */
+@keyframes strongPulse {
+    0%, 100% {
+        transform: scale(1);
+        box-shadow: 0 0 20px rgba(220, 20, 60, 0.8);
+    }
+    50% {
+        transform: scale(1.2);
+        box-shadow: 0 0 40px rgba(220, 20, 60, 1.2);
+    }
 }
 .sidebar .dropdown-menu {
     background: #34495e;
