@@ -271,9 +271,27 @@ document.addEventListener('DOMContentLoaded', () => {
         console.error('Error in contest modal:', error);
     }
 
+    // Scroll animations
+    const observerOptions = {
+        threshold: 0.1,
+        rootMargin: '0px 0px -50px 0px'
+    };
 
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.style.animation = 'fadeInUp 1s ease-out forwards';
+                entry.target.style.opacity = '1';
+            }
+        });
+    }, observerOptions);
 
-
+    // Observe sections
+    document.querySelectorAll('section').forEach(section => {
+        section.style.opacity = '0';
+        section.style.transform = 'translateY(30px)';
+        observer.observe(section);
+    });
 
 
 });
