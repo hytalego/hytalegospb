@@ -19,6 +19,33 @@ document.addEventListener('DOMContentLoaded', () => {
 
     let isInitial = true;
 
+    function updateTimer(daysEl, hoursEl, minutesEl, secondsEl) {
+        const now = new Date();
+        const timeDifference = releaseDate - now;
+        if (timeDifference > 0) {
+            const days = Math.floor(timeDifference / (1000 * 60 * 60 * 24));
+            const hours = Math.floor((timeDifference % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            const minutes = Math.floor((timeDifference % (1000 * 60 * 60)) / (1000 * 60));
+            const seconds = Math.floor((timeDifference % (1000 * 60)) / 1000);
+
+            // Обновить текст
+            daysEl.textContent = days.toString().padStart(2, '0');
+            hoursEl.textContent = hours.toString().padStart(2, '0');
+            minutesEl.textContent = minutes.toString().padStart(2, '0');
+            secondsEl.textContent = seconds.toString().padStart(2, '0');
+
+            isInitial = false;
+        } else {
+            daysEl.textContent = '00';
+            hoursEl.textContent = '00';
+            minutesEl.textContent = '00';
+            secondsEl.textContent = '00';
+            if (daysEl.id === 'release-days') {
+                document.getElementById('release-timer').innerHTML = '<span class="final-msg">Игра вышла!</span>';
+            }
+        }
+    }
+
     function updateReleaseTimer() {
         const now = new Date();
         const timeDifference = releaseDate - now;
@@ -69,6 +96,17 @@ document.addEventListener('DOMContentLoaded', () => {
 
     setInterval(updateReleaseTimer, 1000);
     updateReleaseTimer(); // Initial call
+
+    // Update header timer
+    const releaseDaysH = document.getElementById('release-days-h');
+    const releaseHoursH = document.getElementById('release-hours-h');
+    const releaseMinutesH = document.getElementById('release-minutes-h');
+    const releaseSecondsH = document.getElementById('release-seconds-h');
+
+    if (releaseDaysH && releaseHoursH && releaseMinutesH && releaseSecondsH) {
+        setInterval(() => updateTimer(releaseDaysH, releaseHoursH, releaseMinutesH, releaseSecondsH), 1000);
+        updateTimer(releaseDaysH, releaseHoursH, releaseMinutesH, releaseSecondsH); // Initial call
+    }
 
     // Обработка вкладок
     const tabButtons = document.querySelectorAll('.tab-btn');

@@ -93,27 +93,38 @@ b <!DOCTYPE html>
         </div>
     </div>
 
-    <header class="header">
-        <div class="logo"><img src="data/img/logo.png" alt="Hytale Logo"></div>
-        <button class="hamburger" id="hamburger-btn">
-            <span></span>
-            <span></span>
-            <span></span>
-        </button>
-        <nav id="mobile-nav">
-            <ul>
-                <li><a href="#home">Главная</a></li>
-                <li><a href="#about">Об игре</a></li>
-                <li><a href="#screenshots">Скриншоты</a></li>
-                <li><a href="#videos">Видео</a></li>
-                <li><a href="mods/index.html">Моды</a></li>
-                <li><a href="mycontent/index.html">Мой контент</a></li>
-            </ul>
-        </nav>
-    </header>
+<header class="header">
+    <div class="logo"><img src="data/img/logo.png" alt="Hytale Logo"></div>
+    <div class="timer-in-header">
+        <div class="timer-text">До выхода:</div>
+        <div class="timer"><span id="release-days-h"></span>:<span id="release-hours-h"></span>:<span id="release-minutes-h"></span>:<span id="release-seconds-h"></span></div>
+    </div>
+    <button class="hamburger" id="hamburger-btn">
+        <span></span>
+        <span></span>
+        <span></span>
+    </button>
+    <nav id="mobile-nav">
+        <ul>
+            <li><a href="#home">Главная</a></li>
+            <li><a href="#about">Об игре</a></li>
+            <li><a href="#screenshots">Скриншоты</a></li>
+            <li><a href="#videos">Видео</a></li>
+            <li><a href="mods/index.html">Моды</a></li>
+            <li><a href="mycontent/index.html">Мой контент</a></li>
+        </ul>
+    </nav>
+</header>
 
     <div class="sidebar">
         <div class="logo-centered"><img src="data/img/logo.png" alt="Hytale Logo"></div>
+        <div class="timer-in-sidebar">
+            <div class="timer-text">До выхода игры:</div>
+            <div class="timer"><span id="release-days"></span>:<span id="release-hours"></span>:<span id="release-minutes"></span>:<span id="release-seconds"></span></div>
+            <div class="sound-panel-timer">
+                <button id="play-sound-btn" class="sound-btn-timer">НАЖМИ</button>
+            </div>
+        </div>
         <nav>
             <ul>
                 <li><a href="#home">Главная</a></li>
@@ -127,14 +138,6 @@ b <!DOCTYPE html>
     </div>
 
     <section id="home" class="hero">
-        <div class="contest-panel">
-            <div class="contest-content">
-                <div class="contest-text">
-                Конкурс - <span class="no-text">Пока нету</span>
-                </div>
-                <button id="contest-btn" class="contest-btn">Открыть</button>
-            </div>
-        </div>
         <div class="content">
         </div>
         <div class="image">
