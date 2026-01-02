@@ -6,6 +6,17 @@ b <!DOCTYPE html>
     <title>Hytale – Эпическая игра</title>
     <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="styles.css">
+    <script>
+        // Function to detect mobile devices
+        function isMobile() {
+            return /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
+        }
+
+        // Redirect mobile users
+        if (isMobile() || window.innerWidth < 768) {
+            window.location.href = 'mobile-error.html';
+        }
+    </script>
     <style>
         /* Анимация для чисел в таймерах */
         .timer span.flip {

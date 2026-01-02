@@ -1,8 +1,3 @@
-// Redirect mobile users
-if (window.innerWidth < 768) {
-    window.location.href = 'mobile-error.html';
-}
-
 // Таймер: до выхода игры
 const releaseDate = new Date(2026, 0, 13, 18, 0, 0); // January 13, 2026, 18:00:00
 
