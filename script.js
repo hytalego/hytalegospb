@@ -320,6 +320,33 @@ if (ctaButton) {
     });
 }
 
+// Hamburger menu
+const hamburgerBtn = document.getElementById('hamburger-btn');
+const sidebar = document.querySelector('.sidebar');
+
+if (hamburgerBtn && sidebar) {
+    hamburgerBtn.addEventListener('click', () => {
+        sidebar.classList.toggle('active');
+        hamburgerBtn.classList.toggle('active');
+    });
+
+    // Close menu when clicking on a link
+    sidebar.querySelectorAll('a').forEach(link => {
+        link.addEventListener('click', () => {
+            sidebar.classList.remove('active');
+            hamburgerBtn.classList.remove('active');
+        });
+    });
+
+    // Close menu when clicking outside
+    document.addEventListener('click', (e) => {
+        if (!hamburgerBtn.contains(e.target) && !sidebar.contains(e.target)) {
+            sidebar.classList.remove('active');
+            hamburgerBtn.classList.remove('active');
+        }
+    });
+}
+
 // Кнопка включения звука
 const playSoundBtn = document.getElementById('play-sound-btn');
 const bgSound = document.getElementById('bg-sound');

@@ -2,6 +2,7 @@ b <!DOCTYPE html>
 <html lang="ru">
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Hytale – Эпическая игра</title>
     <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="styles.css">
@@ -72,22 +73,6 @@ b <!DOCTYPE html>
             font-size: 14px;
         }
 
-
-
-        @media (max-width: 768px) {
-            .timers-container {
-                top: 100px;
-                padding: 15px;
-            }
-            .timer {
-                font-size: 14px;
-                padding: 8px 10px;
-            }
-            .timer span {
-                font-size: 16px;
-            }
-        }
-
         .timer span {
             display: inline-block;
             margin: 0 15px;
@@ -107,6 +92,25 @@ b <!DOCTYPE html>
             <button id="play-sound-btn" class="sound-btn-timer">НАЖМИ</button>
         </div>
     </div>
+
+    <header class="header">
+        <div class="logo"><img src="data/img/logo.png" alt="Hytale Logo"></div>
+        <button class="hamburger" id="hamburger-btn">
+            <span></span>
+            <span></span>
+            <span></span>
+        </button>
+        <nav id="mobile-nav">
+            <ul>
+                <li><a href="#home">Главная</a></li>
+                <li><a href="#about">Об игре</a></li>
+                <li><a href="#screenshots">Скриншоты</a></li>
+                <li><a href="#videos">Видео</a></li>
+                <li><a href="mods/index.html">Моды</a></li>
+                <li><a href="mycontent/index.html">Мой контент</a></li>
+            </ul>
+        </nav>
+    </header>
 
     <div class="sidebar">
         <div class="logo-centered"><img src="data/img/logo.png" alt="Hytale Logo"></div>
