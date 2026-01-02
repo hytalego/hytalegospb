@@ -453,7 +453,7 @@ body {
 /* ────────────────────────── HERO (чёрный) ─────────────────────── */
 .hero{
     min-height:100vh;background:linear-gradient(135deg, #1e3c72 0%, #2a5298 100%);
-    display:flex;align-items:flex-start;padding:calc(120px + 4rem) 2rem 0;
+    display:flex;align-items:flex-start;padding:calc(120px + 1rem) 0 0;
     position:relative;overflow:hidden;
 }
 .hero::before{content:"";position:absolute;width:100%;height:100%;
@@ -472,10 +472,10 @@ body {
 }
 .cta:hover{background:linear-gradient(45deg, #2980b9, #3498db);transform:scale(1.05);
            box-shadow:0 6px 20px rgba(52, 152, 219, 0.6);}
-.hero .image{z-index:1;max-width:50%;display:flex;flex-direction:column;align-items:center;}
-.hero .image img{max-width:100%;height:auto;border-radius:20px;
-                 box-shadow:0 10px 30px rgba(0,0,0,0.5);animation:fadeInRight 2s;}
-.huge-download-btn-page{margin-top:1rem;}
+.hero .image{z-index:1;width:100%;display:flex;flex-direction:column;align-items:center;justify-content:flex-start;padding-top:2rem;}
+.hero .image img{width:82vw;margin-left:calc(-41vw + 50%);height:auto;max-height:50vh;border-radius:20px;
+                 box-shadow:0 10px 30px rgba(0,0,0,0.5);animation:fadeInRight 2s, glow 2s ease-in-out infinite alternate, float 3s ease-in-out infinite;}
+.huge-download-btn-page{margin-top:1rem;width:82vw;margin-left:calc(-41vw + 50%);padding:2rem 0;animation:bounceIn 1s;}
 .discord-center {
     padding: 0;
     text-align: center;
@@ -485,6 +485,15 @@ body {
     z-index: 9;
 }
 @keyframes fadeInRight{from{opacity:0;transform:translateX(50px);}to{opacity:1;transform:translateX(0);}}
+@keyframes glow {
+    0% { box-shadow: 0 0 30px rgba(255,255,255,0.5); }
+    50% { box-shadow: 0 0 60px rgba(255,255,255,1); }
+    100% { box-shadow: 0 0 30px rgba(255,255,255,0.5); }
+}
+@keyframes float {
+    0%, 100% { transform: translateY(0px); }
+    50% { transform: translateY(-10px); }
+}
 
 /* ────────────────────────── INFO (серый) ─────────────────────── */
 .info{
