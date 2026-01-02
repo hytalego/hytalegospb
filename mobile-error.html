@@ -76,6 +76,29 @@
             transform: scale(1.05);
             box-shadow: 0 6px 20px rgba(52, 152, 219, 0.6);
         }
+
+        /* Mobile optimizations */
+        @media (max-width: 480px) {
+            .error-container {
+                padding: 2rem 1rem;
+            }
+            .logo {
+                width: 150px;
+            }
+            h1 {
+                font-size: 1.2rem;
+            }
+            p {
+                font-size: 0.6rem;
+            }
+            .warning-icon {
+                font-size: 2.5rem;
+            }
+            .back-link {
+                padding: 0.8rem 1.5rem;
+                font-size: 0.5rem;
+            }
+        }
     </style>
 </head>
 <body>
