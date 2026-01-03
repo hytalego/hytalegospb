@@ -23,13 +23,23 @@ document.addEventListener('DOMContentLoaded', function() {
     logoDiv.style.transform = 'translate(-50%, -50%)';
     logoDiv.style.zIndex = '10000';
     logoDiv.style.opacity = '0';
+    logoDiv.style.pointerEvents = 'none'; // Не блокировать клики
 
     // Вычислить количество дней до выхода игры
     const releaseDate = new Date(2026, 0, 13); // 13 января 2026
-    const today = new Date();
-    const daysUntilRelease = Math.ceil((releaseDate - today) / (1000 * 60 * 60 * 24));
-    const imageNumber = Math.max(0, Math.min(10, daysUntilRelease)).toString().padStart(2, '0');
+    let currentImageNumber = null;
+
+    function calculateImageNumber() {
+        const today = new Date();
+        const daysUntilRelease = Math.ceil((releaseDate - today) / (1000 * 60 * 60 * 24));
+        return Math.max(0, Math.min(10, daysUntilRelease)).toString().padStart(2, '0');
+    }
+
+    const imageNumber = calculateImageNumber();
+    currentImageNumber = imageNumber;
     const imageSrc = `data/img/time/${imageNumber}.png`;
+
+    console.log('Today:', new Date().toDateString(), 'Days until release:', Math.ceil((releaseDate - new Date()) / (1000 * 60 * 60 * 24)), 'Image number:', imageNumber);
 
     // Создаем изображение
     const img = document.createElement('img');
