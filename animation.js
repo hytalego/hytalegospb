@@ -12,6 +12,7 @@ document.addEventListener('DOMContentLoaded', function() {
     overlay.style.backgroundColor = 'rgba(0, 0, 0, 0.8)';
     overlay.style.zIndex = '9999';
     overlay.style.opacity = '0';
+    overlay.style.pointerEvents = 'none'; // Не блокировать клики когда прозрачный
     document.body.appendChild(overlay);
 
     // Создаем контейнер для логотипа
