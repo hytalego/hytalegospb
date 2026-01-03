@@ -24,9 +24,16 @@ document.addEventListener('DOMContentLoaded', function() {
     logoDiv.style.zIndex = '10000';
     logoDiv.style.opacity = '0';
 
+    // Вычислить количество дней до выхода игры
+    const releaseDate = new Date(2026, 0, 13); // 13 января 2026
+    const today = new Date();
+    const daysUntilRelease = Math.ceil((releaseDate - today) / (1000 * 60 * 60 * 24));
+    const imageNumber = Math.max(0, Math.min(10, daysUntilRelease)).toString().padStart(2, '0');
+    const imageSrc = `data/img/time/${imageNumber}.png`;
+
     // Создаем изображение
     const img = document.createElement('img');
-    img.src = 'data/img/time/10.png';
+    img.src = imageSrc + '?t=' + Date.now(); // Предотвратить кэширование
     img.alt = 'Logo';
     img.style.width = '900px';
     img.style.height = 'auto';
