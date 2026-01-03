@@ -12,7 +12,7 @@ document.addEventListener('DOMContentLoaded', function() {
     overlay.style.backgroundColor = 'rgba(0, 0, 0, 0.8)';
     overlay.style.zIndex = '9999';
     overlay.style.opacity = '0';
-    overlay.style.pointerEvents = 'none'; // Не блокировать клики когда прозрачный
+    overlay.style.pointerEvents = 'none'; // Не блокировать клики вообще
     document.body.appendChild(overlay);
 
     // Создаем контейнер для логотипа
@@ -31,7 +31,7 @@ document.addEventListener('DOMContentLoaded', function() {
     img.style.width = '900px';
     img.style.height = 'auto';
     img.style.filter = 'drop-shadow(0 0 40px gold) brightness(1.2)';
-    img.style.opacity = '0'; // Начальная прозрачность
+    img.style.opacity = '1'; // Не прозрачная
 
     img.onload = function() {
     };
@@ -89,12 +89,16 @@ document.addEventListener('DOMContentLoaded', function() {
 
             if (progress < 1) {
                 requestAnimationFrame(animate);
+            } else {
+                // Убрать элементы после завершения анимации
+                document.body.removeChild(overlay);
+                document.body.removeChild(logoDiv);
             }
         }
 
         requestAnimationFrame(animate);
     }
 
-    // Запуск через 5 секунд
-    setTimeout(startAnimation, 5000);
+    // Запуск сразу
+    startAnimation();
 });

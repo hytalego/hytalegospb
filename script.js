@@ -189,6 +189,8 @@ document.addEventListener('DOMContentLoaded', () => {
         observer.observe(section);
     });
 
+    // Кнопка Discord работает по умолчанию как ссылка
+
     // Запуск анимации логотипа через 5 секунд (moved to animation.js)
 });
 
@@ -263,7 +265,6 @@ if (playSoundBtn && bgSound) {
     playSoundBtn.addEventListener('click', function() {
         bgSound.play().catch(e => {});
         playSoundBtn.textContent = 'ЗВУК ВКЛЮЧЕН';
-        playSoundBtn.disabled = true;
         playSoundBtn.style.animation = 'none';
     });
 }
