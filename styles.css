@@ -134,10 +134,67 @@ body {
     left: 100%;
 }
 
+/* Telegram banner */
+.telegram-banner {
+    position: fixed;
+    top: 0;
+    left: 250px;
+    width: calc(100vw - 250px);
+    height: 80px;
+    background: linear-gradient(135deg, #ff4500, #dc143c, #8b0000);
+    border: 3px solid #ff0000;
+    border-radius: 10px;
+    box-shadow: 0 0 20px rgba(255, 69, 0, 0.8);
+    z-index: 1000;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    animation: blink 1s infinite alternate;
+}
+
+@keyframes blink {
+    0% { box-shadow: 0 0 20px rgba(255, 69, 0, 0.8); }
+    100% { box-shadow: 0 0 40px rgba(255, 69, 0, 1.2); }
+}
+
+.banner-content {
+    text-align: center;
+    color: white;
+    font-weight: bold;
+    font-size: 1rem;
+}
+
+.banner-text {
+    margin: 0 0 10px 0;
+    text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+    font-family: 'Press Start 2P', monospace;
+}
+
+.banner-text a {
+    color: yellow;
+    text-decoration: underline;
+    transition: color 0.3s ease;
+}
+
+.banner-text a:hover {
+    color: red;
+}
+
+.empty-shelf-btn {
+    background: linear-gradient(45deg, #333, #555);
+    color: #ccc;
+    padding: 5px 10px;
+    border: 2px outset #666;
+    border-radius: 5px;
+    font-size: 0.8rem;
+    cursor: not-allowed;
+    font-family: 'Press Start 2P', monospace;
+}
+
 /* Timer fixed at top, spanning from sidebar to page end */
 .timer-fixed {
     position: fixed;
-    top: 0;
+    top: 80px;
     left: 250px;
     z-index: 1000;
     width: calc(100vw - 250px);
@@ -178,10 +235,7 @@ body {
 
 /* ────────────────────────── HEADER ───────────────────────────── */
 .header{
-    position:fixed;width:100%;top:0;background:linear-gradient(90deg, #1e1e1e, #2c3e50);
-    display:flex;justify-content:space-between;align-items:center;padding:1rem 2rem;
-    z-index:10;transition:background .3s,transform .3s;border-bottom:3px solid #3498db;
-    box-shadow:0 0 10px rgba(52, 152, 219, 0.3);
+    display: none;
 }
 .logo img{height:60px;filter:drop-shadow(2px 2px 4px rgba(0,0,0,0.5));}
 
@@ -514,7 +568,7 @@ body {
 /* ────────────────────────── HERO (чёрный) ─────────────────────── */
 .hero{
     min-height:100vh;background:linear-gradient(135deg, #1e3c72 0%, #2a5298 100%);
-    display:flex;align-items:flex-start;padding:calc(120px + 1rem) 0 0;
+    display:flex;align-items:flex-start;padding:calc(200px + 1rem) 0 0;
     position:relative;overflow:hidden;
 }
 .hero::before{content:"";position:absolute;width:100%;height:100%;
