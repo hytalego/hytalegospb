@@ -39,8 +39,6 @@ document.addEventListener('DOMContentLoaded', function() {
     currentImageNumber = imageNumber;
     const imageSrc = `data/img/time/${imageNumber}.png`;
 
-    console.log('Today:', new Date().toDateString(), 'Days until release:', Math.ceil((releaseDate - new Date()) / (1000 * 60 * 60 * 24)), 'Image number:', imageNumber);
-
     // Создаем изображение
     const img = document.createElement('img');
     img.src = imageSrc + '?t=' + Date.now(); // Предотвратить кэширование
