@@ -100,7 +100,7 @@ b <!DOCTYPE html>
     <div class="telegram-banner">
         <div class="banner-content">
             <p class="banner-text">🎉 ЭПИЧНЫЙ АНОНС! У нас появился новый Telegram канал конкурсов <a href="https://t.me/hgosss" target="_blank">@hgosss</a> - заходите и участвуйте! 🎉</p>
-            <button class="empty-shelf-btn" disabled>конкурс - пока не доступно</button>
+            <button class="empty-shelf-btn" onclick="openContestModal()">Конкурс - Портальный рай</button>
         </div>
     </div>
 
@@ -373,8 +373,26 @@ b <!DOCTYPE html>
     <!-- Contest Modal -->
     <div id="contest-modal" class="contest-modal">
         <div class="contest-modal-content">
-            <span class="contest-close">&times;</span>
-            <!-- Пустое модальное окно -->
+            <span class="contest-close" onclick="closeContestModal()">&times;</span>
+            <div class="contest-scrollable">
+                <img src="data/img/konkurs.jpg" alt="Конкурс" class="contest-image">
+                <h1 class="contest-title">Добро пожаловать в этот <span style="white-space: nowrap;"><span class="shake-letter">к</span><span class="shake-letter">о</span><span class="shake-letter">н</span><span class="shake-letter">к</span><span class="shake-letter">у</span><span class="shake-letter">р</span><span class="shake-letter">с</span></span></h1>
+                <p class="contest-description">Создайте мод процедурной генерации как в Portal 2 и получите приз</p>
+                <h2 class="contest-subtitle">Условия</h2>
+                <ol class="contest-list">
+                    <li>Вы должны быть подписаны в Telegram канале</li>
+                    <li>Мод должен открывать в вкладке настройки генерации</li>
+                    <li>Настроек должно быть не мало</li>
+                    <li>Не должно быть биомов, а должна быть бездна</li>
+                    <li>Генерация должна быть естественной</li>
+                    <li>Должны быть узкие решёточные лабиринты полов как в Portal 2 между пазлами с лестницами, поворотами и так далее</li>
+                    <li>Если включаете камеры (пазлы), дайте возможность их отключать</li>
+                    <li>Можно для меня сделать бонус мод на генерацию чего-либо из России (шанс попасть в первое место выше)</li>
+                </ol>
+                <p class="contest-info">Победители, призы и результаты будут объявлены в нашем Telegram канале</p>
+                <p class="contest-info">Конкурс начинается после выхода игры и продлится до 1 марта</p>
+                <p class="contest-info">На все моды будут сделаны обзоры по топу</p>
+            </div>
         </div>
     </div>
 

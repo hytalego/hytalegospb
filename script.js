@@ -269,6 +269,33 @@ if (playSoundBtn && bgSound) {
     });
 }
 
+// Функции для конкурса модала
+function openContestModal() {
+    const modal = document.getElementById('contest-modal');
+    if (modal) {
+        modal.classList.add('show');
+    }
+}
+
+function closeContestModal() {
+    const modal = document.getElementById('contest-modal');
+    if (modal) {
+        modal.classList.remove('show');
+        modal.classList.add('hide');
+        setTimeout(() => {
+            modal.classList.remove('hide');
+        }, 500);
+    }
+}
+
+// Закрыть модал по клику вне
+window.addEventListener('click', (e) => {
+    const modal = document.getElementById('contest-modal');
+    if (e.target === modal) {
+        closeContestModal();
+    }
+});
+
 // Снег
 function createSnowflake() {
     const snowflake = document.createElement('div');

@@ -181,14 +181,39 @@ body {
 }
 
 .empty-shelf-btn {
-    background: linear-gradient(45deg, #333, #555);
-    color: #ccc;
-    padding: 5px 10px;
-    border: 2px outset #666;
-    border-radius: 5px;
-    font-size: 0.8rem;
-    cursor: not-allowed;
+    background: linear-gradient(45deg, #8B0000, #DC143C, #FF4500);
+    color: white;
+    padding: 10px 15px;
+    border: 3px outset #B22222;
+    border-radius: 10px;
+    font-size: 0.9rem;
+    cursor: pointer;
     font-family: 'Press Start 2P', monospace;
+    transition: all 0.3s ease;
+    box-shadow: 0 0 10px rgba(255, 69, 0, 0.5);
+    position: relative;
+    overflow: hidden;
+}
+
+.empty-shelf-btn::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+    transition: left 0.5s;
+}
+
+.empty-shelf-btn:hover {
+    background: linear-gradient(45deg, #FF4500, #8B0000, #DC143C);
+    transform: scale(1.05);
+    box-shadow: 0 0 20px rgba(255, 69, 0, 0.8);
+}
+
+.empty-shelf-btn:hover::before {
+    left: 100%;
 }
 
 /* Timer fixed at top, spanning from sidebar to page end */
@@ -1040,16 +1065,39 @@ footer{
 }
 
 .contest-modal-content {
-    background: linear-gradient(135deg, #2c3e50, #34495e);
-    margin: 10% auto;
-    padding: 40px;
-    border: 3px solid #3498db;
+    background: linear-gradient(135deg, #0f0f23, #1a1a2e, #16213e, #0f0f23);
+    background-size: 400% 400%;
+    animation: gradientShift 10s ease infinite;
+    margin: 5% auto;
+    padding: 0;
+    border: 5px solid #ff6b6b;
     border-radius: 20px;
     width: 80%;
     max-width: 800px;
     text-align: center;
-    box-shadow: 0 20px 60px rgba(0,0,0,0.8);
+    box-shadow: 0 20px 60px rgba(255, 107, 107, 0.5), 0 0 100px rgba(255, 107, 107, 0.3);
     position: relative;
+}
+
+.contest-scrollable {
+    padding: 40px;
+    max-height: 80vh;
+    overflow-y: auto;
+}
+
+.contest-image {
+    width: 100%;
+    max-height: 300px;
+    object-fit: cover;
+    border-radius: 15px;
+    margin-bottom: 20px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+}
+
+@keyframes gradientShift {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
 }
 .contest-modal.show .contest-modal-content {
     animation: modalSlideIn 0.5s ease;
@@ -1201,4 +1249,95 @@ footer{
     to {
         transform: translateY(100vh);
     }
+}
+
+/* Contest Modal Content Styles */
+.contest-title {
+    font-size: 2rem;
+    color: #3498db;
+    animation: glow 1s infinite alternate, colorCycle 3s infinite;
+    margin-bottom: 1rem;
+    text-shadow: 0 0 10px #3498db;
+}
+
+.contest-description {
+    font-size: 1.5rem;
+    color: #e0e0e0;
+    animation: bounce 1s infinite, colorCycle 4s infinite;
+    margin-bottom: 1.5rem;
+}
+
+.contest-subtitle {
+    font-size: 1.8rem;
+    color: #e74c3c;
+    animation: pulse 1s infinite, colorCycle 5s infinite;
+    margin-bottom: 1rem;
+}
+
+.contest-list {
+    text-align: left;
+    max-width: 600px;
+    margin: 0 auto 1.5rem;
+    list-style-type: decimal;
+    padding-left: 2rem;
+}
+
+.contest-list li {
+    margin-bottom: 0.5rem;
+    color: #bdc3c7;
+    animation: shake 1s infinite, colorCycle 6s infinite;
+}
+
+.contest-info {
+    font-size: 1.2rem;
+    color: #95a5a6;
+    animation: slide 1s infinite alternate, colorCycle 7s infinite;
+    margin-bottom: 0.5rem;
+}
+
+@keyframes glow {
+    0%, 100% { text-shadow: 0 0 10px #3498db; }
+    50% { text-shadow: 0 0 20px #3498db, 0 0 30px #3498db; }
+}
+
+@keyframes bounce {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-10px); }
+}
+
+@keyframes pulse {
+    0%, 100% { transform: scale(1); }
+    50% { transform: scale(1.1); }
+}
+
+@keyframes rotate {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+@keyframes slide {
+    0% { transform: translateX(-10px); }
+    100% { transform: translateX(10px); }
+}
+
+@keyframes shake {
+    0%, 100% { transform: translateX(0); }
+    10% { transform: translateX(-2px); }
+    20% { transform: translateX(2px); }
+    30% { transform: translateX(-2px); }
+    40% { transform: translateX(2px); }
+    50% { transform: translateX(0); }
+}
+
+.shake-letter {
+    display: inline-block;
+    animation: shake 0.5s infinite;
+}
+
+@keyframes colorCycle {
+    0% { color: #3498db; }
+    25% { color: #e74c3c; }
+    50% { color: #f39c12; }
+    75% { color: #9b59b6; }
+    100% { color: #3498db; }
 }
