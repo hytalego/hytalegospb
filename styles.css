@@ -398,17 +398,14 @@ body {
 .sidebar nav li {
     margin: 1rem 0;
 }
-.sidebar nav li:nth-last-child(2) {
-    margin-top: 3rem;
-}
 .sidebar nav li:nth-last-child(1) {
-    margin-top: 1rem;
+    margin-top: 5rem;
 }
-.sidebar nav li:nth-last-child(-n+2) a {
+.sidebar nav li:nth-last-child(1) a {
     background: linear-gradient(45deg, #8B0000, #DC143C);
     border: 3px outset #B22222;
 }
-.sidebar nav li:nth-last-child(-n+2) a:hover {
+.sidebar nav li:nth-last-child(1) a:hover {
     background: linear-gradient(45deg, #DC143C, #8B0000);
 }
 .sidebar nav a {
